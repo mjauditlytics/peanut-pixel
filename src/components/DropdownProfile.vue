@@ -9,7 +9,7 @@
     >
       <img class="w-8 h-8 rounded-full" :src="UserAvatar" width="32" height="32" alt="User" />
       <div class="flex items-center truncate">
-        <span class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">Acme Inc.</span>
+        <span class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">{{user.displayName}}</span>
         <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
           <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
         </svg>
@@ -23,9 +23,9 @@
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div v-show="dropdownOpen" class="origin-top-right z-10 absolute top-full min-w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1" :class="align === 'right' ? 'right-0' : 'left-0'">
+      <div v-show="dropdownOpen" class="origin-top-right z-10 absolute top-full min-w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1" :class="props.align === 'right' ? 'right-0' : 'left-0'">
         <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200 dark:border-slate-700">
-          <div class="font-medium text-slate-800 dark:text-slate-100">Acme Inc.</div>
+          <div class="font-medium text-slate-800 dark:text-slate-100">{{user.email}}</div>
           <div class="text-xs text-slate-500 dark:text-slate-400 italic">Administrator</div>
         </div>
         <ul
@@ -37,7 +37,8 @@
             <router-link class="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3" to="/settings/account" @click="dropdownOpen = false">Settings</router-link>
           </li>
           <li>
-            <router-link class="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3" to="/signin" @click="dropdownOpen = false">Sign Out</router-link>
+            <button class="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3" @click.prevent="handleSignOut">Sign Out</button>
+            <!-- <router-link class="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3" to="/signin" @click="dropdownOpen = false">Sign Out</router-link> -->
           </li>
         </ul>
       </div> 
@@ -45,19 +46,33 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import UserAvatar from '../images/user-avatar-32.png'
+import { useRouter } from "vue-router"
+import { useAuthStore } from "../stores/useAuthStore"
 
-export default {
-  name: 'DropdownProfile',
-  props: ['align'],
-  data() {
-    return {
-      UserAvatar: UserAvatar,
+const router = useRouter()
+const authStore = useAuthStore()
+// export default {
+  // name: 'DropdownProfile',
+  const props =  defineProps(['align'])
+  // data() {
+  //   return {
+  //     UserAvatar: UserAvatar,
+  //   }
+  // },  
+  // setup() {
+    const user = ref({
+      displayName: "John Doe",
+      email: "",
+      photoURL: ""
+    })
+
+    const handleSignOut = async () => {
+      await authStore.signOut(); // to do handle error condtions
+      router.push("/signIn");
     }
-  },  
-  setup() {
 
     const dropdownOpen = ref(false)
     const trigger = ref(null)
@@ -75,9 +90,18 @@ export default {
       dropdownOpen.value = false
     }
 
-    onMounted(() => {
+    onMounted(async () => {
       document.addEventListener('click', clickHandler)
       document.addEventListener('keydown', keyHandler)
+      
+      console.log("Mounted")
+      console.log("user ", user.value)
+      user.value = await authStore.getCurrentUser()
+      const dispName = user.value.displayName
+      const email = user.value.email
+      if (!dispName || dispName.length < 1) {
+        user.value.displayName = email.substring(0, email.indexOf("@"))
+      }      
     })
 
     onUnmounted(() => {
@@ -85,11 +109,11 @@ export default {
       document.removeEventListener('keydown', keyHandler)
     })
 
-    return {
-      dropdownOpen,
-      trigger,
-      dropdown,
-    }
-  }
-}
+    // return {
+    //   dropdownOpen,
+    //   trigger,
+    //   dropdown,
+    // }
+  // }
+// }
 </script>

@@ -13,6 +13,7 @@
 
       <!-- Sidebar header -->
       <div class="flex justify-between mb-10 pr-3 sm:px-2">
+        <a class="text-white font-inter text-xl" >Audit AI</a>
         <!-- Close button -->
         <button
           ref="trigger"
@@ -26,6 +27,7 @@
             <path d="M10.7 18.7l1.4-1.4L7.8 13H20v-2H7.8l4.3-4.3-1.4-1.4L4 12z" />
           </svg>
         </button>
+        
         <!-- Logo -->
         <router-link class="block" to="/">
           <svg width="32" height="32" viewBox="0 0 32 32">
@@ -44,6 +46,7 @@
             <path d="M7.404 2.503l18.339 26.19A15.93 15.93 0 0116 32C7.163 32 0 24.837 0 16 0 10.327 2.952 5.344 7.404 2.503z" fill="url(#logo-a)" />
             <path d="M2.223 24.14L29.777 7.86A15.926 15.926 0 0132 16c0 8.837-7.163 16-16 16-5.864 0-10.991-3.154-13.777-7.86z" fill="url(#logo-b)" />
           </svg>
+           
         </router-link>
       </div>
 
@@ -84,21 +87,7 @@
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Main</span>
                       </a>
                     </li>
-                  </router-link>
-                  <router-link to="/dashboard/analytics" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Analytics</span>
-                      </a>
-                    </li>
-                  </router-link> 
-                  <router-link to="/dashboard/fintech" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Fintech</span>
-                      </a>
-                    </li>
-                  </router-link>                                  
+                  </router-link>                               
                 </ul>
               </div>
             </SidebarLinkGroup>            
@@ -124,73 +113,17 @@
               </a>
               <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                 <ul class="pl-9 mt-1" :class="!parentLink.expanded && 'hidden'">
-                  <router-link to="/ecommerce/customers" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Customers</span>
-                      </a>
-                    </li>
-                  </router-link>
-                  <router-link to="/ecommerce/orders" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Orders</span>
-                      </a>
-                    </li>
-                  </router-link>
                   <router-link to="/ecommerce/invoices" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
                       <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Invoices</span>
                       </a>
                     </li>
-                  </router-link>                  
-                  <router-link to="/ecommerce/shop" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Shop</span>
-                      </a>
-                    </li>
-                  </router-link> 
+                  </router-link>
                   <router-link to="/ecommerce/shop-2" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
                       <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Shop 2</span>
-                      </a>
-                    </li>
-                  </router-link> 
-                  <router-link to="/ecommerce/product" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Single Product</span>
-                      </a>
-                    </li>
-                  </router-link>
-                  <router-link to="/ecommerce/cart" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Cart</span>
-                      </a>
-                    </li>
-                  </router-link>
-                  <router-link to="/ecommerce/cart-2" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Cart 2</span>
-                      </a>
-                    </li>
-                  </router-link>
-                  <router-link to="/ecommerce/cart-3" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Cart 3</span>
-                      </a>
-                    </li>
-                  </router-link>                  
-                  <router-link to="/ecommerce/pay" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Pay</span>
                       </a>
                     </li>
                   </router-link>
@@ -236,20 +169,6 @@
                     <li class="mb-1 last:mb-0">
                       <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Profile</span>
-                      </a>
-                    </li>
-                  </router-link>
-                  <router-link to="/community/feed" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Feed</span>
-                      </a>
-                    </li>
-                  </router-link>
-                  <router-link to="/community/forum" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Forum</span>
                       </a>
                     </li>
                   </router-link>
@@ -312,14 +231,7 @@
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Transactions</span>
                       </a>
                     </li>
-                  </router-link> 
-                  <router-link to="/finance/transaction-details" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Transaction Details</span>
-                      </a>
-                    </li>
-                  </router-link>                
+                  </router-link>               
                 </ul>
               </div>
             </SidebarLinkGroup>    
@@ -391,13 +303,6 @@
               </a>
               <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                 <ul class="pl-9 mt-1" :class="!parentLink.expanded && 'hidden'">
-                  <router-link to="/tasks/kanban" custom v-slot="{ href, navigate, isExactActive }">
-                    <li class="mb-1 last:mb-0">
-                      <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Kanban</span>
-                      </a>
-                    </li>
-                  </router-link>
                   <router-link to="/tasks/list" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
                       <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
@@ -424,34 +329,6 @@
                     <div class="flex flex-shrink-0 ml-2">
                       <span class="inline-flex items-center justify-center h-5 text-xs font-medium text-white bg-indigo-500 px-2 rounded">4</span>
                     </div>
-                  </div>
-                </a>
-              </li>
-            </router-link>
-            <!-- Inbox -->
-            <router-link to="/inbox" custom v-slot="{ href, navigate, isExactActive }">
-              <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
-                <a class="block text-slate-200 truncate transition duration-150" :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href" @click="navigate">
-                  <div class="flex items-center">
-                    <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                      <path class="fill-current" :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'" d="M16 13v4H8v-4H0l3-9h18l3 9h-8Z" />
-                      <path class="fill-current" :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'" d="m23.72 12 .229.686A.984.984 0 0 1 24 13v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-8c0-.107.017-.213.051-.314L.28 12H8v4h8v-4H23.72ZM13 0v7h3l-4 5-4-5h3V0h2Z" />
-                    </svg>
-                    <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Inbox</span>
-                  </div>
-                </a>
-              </li>
-            </router-link>
-            <!-- Calendar -->
-            <router-link to="/calendar" custom v-slot="{ href, navigate, isExactActive }">
-              <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
-                <a class="block text-slate-200 truncate transition duration-150" :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href" @click="navigate">
-                  <div class="flex items-center">
-                    <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                      <path class="fill-current" :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'" d="M1 3h22v20H1z" />
-                      <path class="fill-current" :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'" d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
-                    </svg>
-                    <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Calendar</span>
                   </div>
                 </a>
               </li>

@@ -1,44 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from "./stores/useAuthStore";
 import Dashboard from './pages/Dashboard.vue'
-import Analytics from './pages/Analytics.vue'
-import Fintech from './pages/Fintech.vue'
-import Customers from './pages/ecommerce/Customers.vue'
-import Orders from './pages/ecommerce/Orders.vue'
+
 import Invoices from './pages/ecommerce/Invoices.vue'
-import Shop from './pages/ecommerce/Shop.vue'
 import Shop2 from './pages/ecommerce/Shop2.vue'
-import Product from './pages/ecommerce/Product.vue'
-import Cart from './pages/ecommerce/Cart.vue'
-import Cart2 from './pages/ecommerce/Cart2.vue'
-import Cart3 from './pages/ecommerce/Cart3.vue'
-import Pay from './pages/ecommerce/Pay.vue'
 import Campaigns from './pages/Campaigns.vue'
 import UsersTabs from './pages/community/UsersTabs.vue'
 import UsersTiles from './pages/community/UsersTiles.vue'
 import Profile from './pages/community/Profile.vue'
-import Feed from './pages/community/Feed.vue'
-import Forum from './pages/community/Forum.vue'
 import ForumPost from './pages/community/ForumPost.vue'
-import Meetups from './pages/community/Meetups.vue'
-import MeetupsPost from './pages/community/MeetupsPost.vue'
 import CreditCards from './pages/finance/CreditCards.vue'
 import Transactions from './pages/finance/Transactions.vue'
-import TransactionDetails from './pages/finance/TransactionDetails.vue'
 import JobListing from './pages/job/JobListing.vue'
 import JobPost from './pages/job/JobPost.vue'
 import CompanyProfile from './pages/job/CompanyProfile.vue'
 import Messages from './pages/Messages.vue'
-import TasksKanban from './pages/tasks/TasksKanban.vue'
 import TasksList from './pages/tasks/TasksList.vue'
-import Inbox from './pages/Inbox.vue'
-import Calendar from './pages/Calendar.vue'
 import Account from './pages/settings/Account.vue'
 import Notifications from './pages/settings/Notifications.vue'
 import Apps from './pages/settings/Apps.vue'
-import Plans from './pages/settings/Plans.vue'
-import Billing from './pages/settings/Billing.vue'
 import Feedback from './pages/settings/Feedback.vue'
-import Changelog from './pages/utility/Changelog.vue'
 import Roadmap from './pages/utility/Roadmap.vue'
 import Faqs from './pages/utility/Faqs.vue'
 import EmptyState from './pages/utility/EmptyState.vue'
@@ -72,55 +53,55 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: Dashboard
+      component: Dashboard,
+      meta: {
+        requiresAuth: true
+      }
+    }, 
+    {
+      path: '/dashboard',
+      component: Dashboard,
+      meta: {
+        requiresAuth: true
+      }
+    },
+ 
+    {
+      path: '/signin',
+      component: Signin
     },
     {
-      path: '/dashboard/analytics',
-      component: Analytics
+      path: '/signup',
+      component: Signup
     },
     {
-      path: '/dashboard/fintech',
-      component: Fintech
+      path: '/reset-password',
+      component: ResetPassword
+    },
+
+    {
+      path: '/onboarding-01',
+      component: Onboarding01
+    },
+    {
+      path: '/onboarding-02',
+      component: Onboarding02
+    },
+    {
+      path: '/onboarding-03',
+      component: Onboarding03
+    },
+    {
+      path: '/onboarding-04',
+      component: Onboarding04
     },    
-    {
-      path: '/ecommerce/customers',
-      component: Customers
-    },
-    {
-      path: '/ecommerce/orders',
-      component: Orders
-    },
     {
       path: '/ecommerce/invoices',
       component: Invoices
     },
     {
-      path: '/ecommerce/shop',
-      component: Shop
-    },
-    {
       path: '/ecommerce/shop-2',
       component: Shop2
-    },
-    {
-      path: '/ecommerce/product',
-      component: Product
-    },
-    {
-      path: '/ecommerce/cart',
-      component: Cart
-    },
-    {
-      path: '/ecommerce/cart-2',
-      component: Cart2
-    },
-    {
-      path: '/ecommerce/cart-3',
-      component: Cart3
-    },
-    {
-      path: '/ecommerce/pay',
-      component: Pay
     },
     {
       path: '/campaigns',
@@ -139,24 +120,8 @@ const router = createRouter({
       component: Profile
     },
     {
-      path: '/community/feed',
-      component: Feed
-    },
-    {
-      path: '/community/forum',
-      component: Forum
-    },
-    {
       path: '/community/forum-post',
       component: ForumPost
-    },    
-    {
-      path: '/community/meetups',
-      component: Meetups
-    },
-    {
-      path: '/community/meetups-post',
-      component: MeetupsPost
     },
     {
       path: '/finance/cards',
@@ -165,10 +130,6 @@ const router = createRouter({
     {
       path: '/finance/transactions',
       component: Transactions
-    },
-    {
-      path: '/finance/transaction-details',
-      component: TransactionDetails
     },
     {
       path: '/job/job-listing',
@@ -187,20 +148,8 @@ const router = createRouter({
       component: Messages
     },
     {
-      path: '/tasks/kanban',
-      component: TasksKanban
-    },
-    {
       path: '/tasks/list',
       component: TasksList
-    },    
-    {
-      path: '/inbox',
-      component: Inbox
-    },
-    {
-      path: '/calendar',
-      component: Calendar
     },
     {
       path: '/settings/account',
@@ -215,20 +164,8 @@ const router = createRouter({
       component: Apps
     },
     {
-      path: '/settings/plans',
-      component: Plans
-    },
-    {
-      path: '/settings/billing',
-      component: Billing
-    },
-    {
       path: '/settings/feedback',
       component: Feedback
-    },
-    {
-      path: '/utility/changelog',
-      component: Changelog
     },
     {
       path: '/utility/roadmap',
@@ -250,34 +187,8 @@ const router = createRouter({
       path: '/utility/knowledge-base',
       component: KnowledgeBase
     },
-    {
-      path: '/signin',
-      component: Signin
-    },
-    {
-      path: '/signup',
-      component: Signup
-    },
-    {
-      path: '/reset-password',
-      component: ResetPassword
-    },
-    {
-      path: '/onboarding-01',
-      component: Onboarding01
-    },
-    {
-      path: '/onboarding-02',
-      component: Onboarding02
-    },
-    {
-      path: '/onboarding-03',
-      component: Onboarding03
-    },
-    {
-      path: '/onboarding-04',
-      component: Onboarding04
-    },
+   
+   
     {
       path: '/component/button',
       component: ButtonPage
@@ -336,5 +247,23 @@ const router = createRouter({
     }
   ]
 })
+
+
+// router.beforeEach(async (to) => {
+//   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+//   if (requiresAuth && !await getCurrentUser()) {
+//     return '/signin';
+//   } 
+// })
+
+router.beforeEach(async (to, from, next) => {
+  let currentUser = await useAuthStore().getCurrentUser();
+
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  //page does not require auth and user is not logged in
+  if (requiresAuth && !currentUser) next("/signIn");
+  // else if (!requiresAuth && currentUser) next("/generator");
+  else next();
+});
 
 export default router

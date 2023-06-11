@@ -10,8 +10,9 @@
           <div class="flex-1">
             <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
               <!-- Logo -->
-              <router-link class="block" to="/">
-                <svg width="32" height="32" viewBox="0 0 32 32">
+              <router-link class="block pt-5 mt-5" to="/">
+                <img src="../images/logo4.png" alt="audit AI Logo">
+                <!-- <svg width="32" height="32" viewBox="0 0 32 32">
                   <defs>
                     <linearGradient x1="28.538%" y1="20.229%" x2="100%" y2="108.156%" id="logo-a">
                       <stop stop-color="#A5B4FC" stop-opacity="0" offset="0%" />
@@ -27,6 +28,7 @@
                   <path d="M7.404 2.503l18.339 26.19A15.93 15.93 0 0116 32C7.163 32 0 24.837 0 16 0 10.327 2.952 5.344 7.404 2.503z" fill="url(#logo-a)" />
                   <path d="M2.223 24.14L29.777 7.86A15.926 15.926 0 0132 16c0 8.837-7.163 16-16 16-5.864 0-10.991-3.154-13.777-7.86z" fill="url(#logo-b)" />
                 </svg>
+                <a class="text-black font-inter text-xl" >Audit AI</a> -->
               </router-link>
             </div>
           </div>          
@@ -34,39 +36,39 @@
           <div class="max-w-sm mx-auto w-full px-4 py-8">
             <h1 class="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-6">Welcome back! ✨</h1>
             <!-- Form -->
-            <form>
+            <form @submit.prevent="signIn">
               <div class="space-y-4">
                 <div>
                   <label class="block text-sm font-medium mb-1" for="email">Email Address</label>
-                  <input id="email" class="form-input w-full" type="email" />
+                  <input id="email" class="form-input w-full" type="email" v-model="email" required/>
+                  <div v-if ="errType === 'username'" class="text-xs mt-1 text-rose-500">{{ errMsg }}</div>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium mb-1" for="password">Password</label>
-                  <input id="password" class="form-input w-full" type="password" autoComplete="on" />
+                  <label class="block text-sm font-medium mb-1" for="password">Password</label>                                
+                  <input id="password" class="form-input w-full" type="password" autoComplete="on" v-model="password" required/>
+                  <div v-if ="errType === 'password'" class="text-xs mt-1 text-rose-500">{{ errMsg }}</div>
                 </div>
               </div>
               <div class="flex items-center justify-between mt-6">
                 <div class="mr-1">
                   <router-link class="text-sm underline hover:no-underline" to="/reset-password">Forgot Password?</router-link>
                 </div>
-                <router-link class="btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" to="/">Sign In</router-link>
+                <button :disabled="signInBtnDisabled" class="btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" type="submit">Sign in</button>
+                <!-- <router-link class="btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" to="/">Sign In</router-link> -->
               </div>
             </form>
+            <div class="pt-5 mt-6 border-t border-slate-200 dark:border-slate-700">
+            <!-- https://tailwindflex.com/shakti/google-login-signup-button -->
+              <button
+                class="align-center px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+                <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
+                <button @click.prevent="signInWithGoogle">Login with Google</button>
+            </button>
+          </div>
             <!-- Footer -->
             <div class="pt-5 mt-6 border-t border-slate-200 dark:border-slate-700">
               <div class="text-sm">
                 Don’t you have an account? <router-link class="font-medium text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400" to="/signup">Sign Up</router-link>
-              </div>
-              <!-- Warning -->
-              <div class="mt-5">
-                <div class="bg-amber-100 dark:bg-amber-400/30 text-amber-600 dark:text-amber-400 px-3 py-2 rounded">
-                  <svg class="inline w-3 h-3 shrink-0 fill-current mr-2" viewBox="0 0 12 12">
-                    <path d="M10.28 1.28L3.989 7.575 1.695 5.28A1 1 0 00.28 6.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 1.28z" />
-                  </svg>
-                  <span class="text-sm">
-                    To support you during the pandemic super pro features are free until March 31st.
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -85,9 +87,73 @@
   </main>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from "vue";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  getAuth,
+  signInWithEmailAndPassword
+} from "firebase/auth";
 
-export default {
-  name: 'Signin',
-}
+import { useAuthStore } from "../stores/useAuthStore";
+
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const authStore = useAuthStore();
+
+const email = ref("");
+const password = ref("");
+const errMsg = ref();
+const errType = ref(); // username ,  password
+const signInBtnDisabled = computed(() => !email.value || !password.value);
+
+const handlePostLogin = auth => {
+  console.log("Successfully logged in", auth.currentUser);
+  authStore.setUser(auth.currentUser);
+  router.push("/dashboard");
+};
+
+const signIn = () => {
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, email.value, password.value)
+    .then(data => handlePostLogin(auth))
+    .catch(error => {
+      console.log("Error signing in", error);
+      switch (error.code) {
+        case "auth/invalid-email":
+          errMsg.value = "Invalid email address";
+          errType.value = "username";
+          break;
+        case "auth/user-not-found":
+          errMsg.value = "User not found";
+          errType.value = "username";
+          break;
+        case "auth/wrong-password":
+          errMsg.value = "Wrong password";
+          errType.value = "password";
+          break;
+        case "auth/email-already-in-use":
+          errMsg.value = "Email already in use";
+          errType.value = "username";
+          break;
+        default:
+          errMsg.value = "Unknown sign in error";
+      }
+    });
+};
+
+const signInWithGoogle = () => {
+  const auth = getAuth();
+  const googleAuthProvider = new GoogleAuthProvider();
+  signInWithPopup(auth, googleAuthProvider)
+    .then(data => handlePostLogin(auth))
+    .catch(error => {
+      console.log("Error signing in", error);
+    });
+};
+const signInWithFB = () => {
+  alert("Not yet imlpemented");
+};
 </script>
