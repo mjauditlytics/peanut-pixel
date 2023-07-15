@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from "./stores/useAuthStore";
 import Dashboard from './pages/Dashboard.vue'
+import SetupProjectStep1 from './pages/audits/SetupProjectStep1.vue'
+import SetupProjectStep2 from './pages/audits/SetupProjectStep2.vue'
+import SetupProjectStep3 from './pages/audits/SetupProjectStep3.vue'
+import SetupProjectStep4 from './pages/audits/SetupProjectStep4.vue'
 
 import Invoices from './pages/ecommerce/Invoices.vue'
 import Shop2 from './pages/ecommerce/Shop2.vue'
@@ -57,7 +61,7 @@ const router = createRouter({
       meta: {
         requiresAuth: true
       }
-    }, 
+    },
     {
       path: '/dashboard',
       component: Dashboard,
@@ -65,7 +69,22 @@ const router = createRouter({
         requiresAuth: true
       }
     },
- 
+    {
+      path: '/audits/scratch/step-1',
+      component: SetupProjectStep1
+    },
+    {
+      path: '/audits/scratch/step-2',
+      component: SetupProjectStep2
+    },
+    {
+      path: '/audits/scratch/step-3',
+      component: SetupProjectStep3
+    },
+    {
+      path: '/audits/scratch/step-4',
+      component: SetupProjectStep4
+    },
     {
       path: '/signin',
       component: Signin
@@ -94,7 +113,7 @@ const router = createRouter({
     {
       path: '/onboarding-04',
       component: Onboarding04
-    },    
+    },
     {
       path: '/ecommerce/invoices',
       component: Invoices
@@ -126,7 +145,7 @@ const router = createRouter({
     {
       path: '/finance/cards',
       component: CreditCards
-    }, 
+    },
     {
       path: '/finance/transactions',
       component: Transactions
@@ -142,7 +161,7 @@ const router = createRouter({
     {
       path: '/job/company-profile',
       component: CompanyProfile
-    },            
+    },
     {
       path: '/messages',
       component: Messages
@@ -187,8 +206,8 @@ const router = createRouter({
       path: '/utility/knowledge-base',
       component: KnowledgeBase
     },
-   
-   
+
+
     {
       path: '/component/button',
       component: ButtonPage
