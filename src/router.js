@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from "./stores/useAuthStore";
 import Dashboard from './pages/Dashboard.vue'
-import SetupProjectStep1 from './pages/audits/SetupProjectStep1.vue'
-import SetupProjectStep2 from './pages/audits/SetupProjectStep2.vue'
-import SetupProjectStep3 from './pages/audits/SetupProjectStep3.vue'
-import SetupProjectStep4 from './pages/audits/SetupProjectStep4.vue'
+
+import FromScratchContainer from './pages/audits/FromScratchContainer.vue'
+
 
 import Invoices from './pages/ecommerce/Invoices.vue'
 import Shop2 from './pages/ecommerce/Shop2.vue'
@@ -70,20 +69,8 @@ const router = createRouter({
       }
     },
     {
-      path: '/audits/scratch/step-1',
-      component: SetupProjectStep1
-    },
-    {
-      path: '/audits/scratch/step-2',
-      component: SetupProjectStep2
-    },
-    {
-      path: '/audits/scratch/step-3',
-      component: SetupProjectStep3
-    },
-    {
-      path: '/audits/scratch/step-4',
-      component: SetupProjectStep4
+      path: '/audits/scratch/start',
+      component: FromScratchContainer
     },
     {
       path: '/signin',

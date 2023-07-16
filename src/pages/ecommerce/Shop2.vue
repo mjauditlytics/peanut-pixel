@@ -25,7 +25,7 @@
           <div class="flex flex-col space-y-10 sm:flex-row sm:space-x-6 sm:space-y-0 md:flex-col md:space-x-0 md:space-y-10 xl:flex-row xl:space-x-6 xl:space-y-0 mt-9">
 
             <!-- Sidebar -->
-            <ShopSidebar />
+            <!-- <ShopSidebar /> -->
 
             <!-- Content -->
             <div>
@@ -55,7 +55,7 @@
 
               <!-- Cards 1 (Video Courses) -->
               <div>
-                <div class="grid grid-cols-12 gap-6">
+                <div class="grid grid-cols-12 gap-8">
                   <ShopCards07 />
                 </div>
               </div>
