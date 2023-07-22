@@ -7,34 +7,36 @@ import FromScratchContainer from './pages/audits/FromScratchContainer.vue'
 
 import Invoices from './pages/ecommerce/Invoices.vue'
 import Shop2 from './pages/ecommerce/Shop2.vue'
-import Campaigns from './pages/Campaigns.vue'
-import UsersTabs from './pages/community/UsersTabs.vue'
-import UsersTiles from './pages/community/UsersTiles.vue'
-import Profile from './pages/community/Profile.vue'
-import ForumPost from './pages/community/ForumPost.vue'
-import CreditCards from './pages/finance/CreditCards.vue'
-import Transactions from './pages/finance/Transactions.vue'
-import JobListing from './pages/job/JobListing.vue'
-import JobPost from './pages/job/JobPost.vue'
-import CompanyProfile from './pages/job/CompanyProfile.vue'
-import Messages from './pages/Messages.vue'
-import TasksList from './pages/tasks/TasksList.vue'
-import Account from './pages/settings/Account.vue'
-import Notifications from './pages/settings/Notifications.vue'
-import Apps from './pages/settings/Apps.vue'
-import Feedback from './pages/settings/Feedback.vue'
-import Roadmap from './pages/utility/Roadmap.vue'
-import Faqs from './pages/utility/Faqs.vue'
-import EmptyState from './pages/utility/EmptyState.vue'
+import AuditList from './pages/audits/AuditList.vue'
+
+// import Campaigns from './pages/Campaigns.vue'
+// import UsersTabs from './pages/community/UsersTabs.vue'
+// import UsersTiles from './pages/community/UsersTiles.vue'
+// import Profile from './pages/community/Profile.vue'
+// import ForumPost from './pages/community/ForumPost.vue'
+// import CreditCards from './pages/finance/CreditCards.vue'
+// import Transactions from './pages/finance/Transactions.vue'
+// import JobListing from './pages/job/JobListing.vue'
+// import JobPost from './pages/job/JobPost.vue'
+// import CompanyProfile from './pages/job/CompanyProfile.vue'
+// import Messages from './pages/Messages.vue'
+// import TasksList from './pages/tasks/TasksList.vue'
+// import Account from './pages/settings/Account.vue'
+// import Notifications from './pages/settings/Notifications.vue'
+// import Apps from './pages/settings/Apps.vue'
+// import Feedback from './pages/settings/Feedback.vue'
+// import Roadmap from './pages/utility/Roadmap.vue'
+// import Faqs from './pages/utility/Faqs.vue'
+// import EmptyState from './pages/utility/EmptyState.vue'
 import PageNotFound from './pages/utility/PageNotFound.vue'
-import KnowledgeBase from './pages/utility/KnowledgeBase.vue'
+// import KnowledgeBase from './pages/utility/KnowledgeBase.vue'
 import Signin from './pages/Signin.vue'
 import Signup from './pages/Signup.vue'
-import ResetPassword from './pages/ResetPassword.vue'
-import Onboarding01 from './pages/Onboarding01.vue'
-import Onboarding02 from './pages/Onboarding02.vue'
-import Onboarding03 from './pages/Onboarding03.vue'
-import Onboarding04 from './pages/Onboarding04.vue'
+// import ResetPassword from './pages/ResetPassword.vue'
+// import Onboarding01 from './pages/Onboarding01.vue'
+// import Onboarding02 from './pages/Onboarding02.vue'
+// import Onboarding03 from './pages/Onboarding03.vue'
+// import Onboarding04 from './pages/Onboarding04.vue'
 import ButtonPage from './pages/component/ButtonPage.vue'
 import FormPage from './pages/component/FormPage.vue'
 import DropdownPage from './pages/component/DropdownPage.vue'
@@ -44,7 +46,7 @@ import PaginationPage from './pages/component/PaginationPage.vue'
 import TabsPage from './pages/component/TabsPage.vue'
 import BreadcrumbPage from './pages/component/BreadcrumbPage.vue'
 import BadgePage from './pages/component/BadgePage.vue'
-import AvatarPage from './pages/component/AvatarPage.vue'
+// import AvatarPage from './pages/component/AvatarPage.vue'
 import TooltipPage from './pages/component/TooltipPage.vue'
 import AccordionPage from './pages/component/AccordionPage.vue'
 import IconsPage from './pages/component/IconsPage.vue'
@@ -80,27 +82,27 @@ const router = createRouter({
       path: '/signup',
       component: Signup
     },
-    {
-      path: '/reset-password',
-      component: ResetPassword
-    },
+    // {
+    //   path: '/reset-password',
+    //   component: ResetPassword
+    // },
 
-    {
-      path: '/onboarding-01',
-      component: Onboarding01
-    },
-    {
-      path: '/onboarding-02',
-      component: Onboarding02
-    },
-    {
-      path: '/onboarding-03',
-      component: Onboarding03
-    },
-    {
-      path: '/onboarding-04',
-      component: Onboarding04
-    },
+    // {
+    //   path: '/onboarding-01',
+    //   component: Onboarding01
+    // },
+    // {
+    //   path: '/onboarding-02',
+    //   component: Onboarding02
+    // },
+    // {
+    //   path: '/onboarding-03',
+    //   component: Onboarding03
+    // },
+    // {
+    //   path: '/onboarding-04',
+    //   component: Onboarding04
+    // },
     {
       path: '/ecommerce/invoices',
       component: Invoices
@@ -110,89 +112,94 @@ const router = createRouter({
       component: Shop2
     },
     {
-      path: '/campaigns',
-      component: Campaigns
+      path: '/ecommerce/project-audit-list',
+      component: AuditList
+
     },
-    {
-      path: '/community/users-tabs',
-      component: UsersTabs
-    },
-    {
-      path: '/community/users-tiles',
-      component: UsersTiles
-    },
-    {
-      path: '/community/profile',
-      component: Profile
-    },
-    {
-      path: '/community/forum-post',
-      component: ForumPost
-    },
-    {
-      path: '/finance/cards',
-      component: CreditCards
-    },
-    {
-      path: '/finance/transactions',
-      component: Transactions
-    },
-    {
-      path: '/job/job-listing',
-      component: JobListing
-    },
-    {
-      path: '/job/job-post',
-      component: JobPost
-    },
-    {
-      path: '/job/company-profile',
-      component: CompanyProfile
-    },
-    {
-      path: '/messages',
-      component: Messages
-    },
-    {
-      path: '/tasks/list',
-      component: TasksList
-    },
-    {
-      path: '/settings/account',
-      component: Account
-    },
-    {
-      path: '/settings/notifications',
-      component: Notifications
-    },
-    {
-      path: '/settings/apps',
-      component: Apps
-    },
-    {
-      path: '/settings/feedback',
-      component: Feedback
-    },
-    {
-      path: '/utility/roadmap',
-      component: Roadmap
-    },
-    {
-      path: '/utility/faqs',
-      component: Faqs
-    },
-    {
-      path: '/utility/empty-state',
-      component: EmptyState
-    },
+    // {
+    //   path: '/campaigns',
+    //   component: Campaigns
+    // },
+    // {
+    //   path: '/community/users-tabs',
+    //   component: UsersTabs
+    // },
+    // {
+    //   path: '/community/users-tiles',
+    //   component: UsersTiles
+    // },
+    // {
+    //   path: '/community/profile',
+    //   component: Profile
+    // },
+    // {
+    //   path: '/community/forum-post',
+    //   component: ForumPost
+    // },
+    // {
+    //   path: '/finance/cards',
+    //   component: CreditCards
+    // },
+    // {
+    //   path: '/finance/transactions',
+    //   component: Transactions
+    // },
+    // {
+    //   path: '/job/job-listing',
+    //   component: JobListing
+    // },
+    // {
+    //   path: '/job/job-post',
+    //   component: JobPost
+    // },
+    // {
+    //   path: '/job/company-profile',
+    //   component: CompanyProfile
+    // },
+    // {
+    //   path: '/messages',
+    //   component: Messages
+    // },
+    // {
+    //   path: '/tasks/list',
+    //   component: TasksList
+    // },
+    // {
+    //   path: '/settings/account',
+    //   component: Account
+    // },
+    // {
+    //   path: '/settings/notifications',
+    //   component: Notifications
+    // },
+    // {
+    //   path: '/settings/apps',
+    //   component: Apps
+    // },
+    // {
+    //   path: '/settings/feedback',
+    //   component: Feedback
+    // },
+    // {
+    //   path: '/utility/roadmap',
+    //   component: Roadmap
+    // },
+    // {
+    //   path: '/utility/faqs',
+    //   component: Faqs
+    // },
+    // {
+    //   path: '/utility/empty-state',
+    //   component: EmptyState
+    // },
     {
       path: '/utility/404',
       component: PageNotFound
     },
-    {
-      path: '/utility/knowledge-base',
-      component: KnowledgeBase
-    },
+    // {
+    //   path: '/utility/knowledge-base',
+    //   component: KnowledgeBase
+    // },
 
 
     {
@@ -231,10 +238,10 @@ const router = createRouter({
       path: '/component/badge',
       component: BadgePage
     },
-    {
-      path: '/component/avatar',
-      component: AvatarPage
-    },
+    // {
+    //   path: '/component/avatar',
+    //   component: AvatarPage
+    // },
     {
       path: '/component/tooltip',
       component: TooltipPage
