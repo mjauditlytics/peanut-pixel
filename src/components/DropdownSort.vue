@@ -32,7 +32,8 @@
             <a class="font-medium text-sm text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-200 flex items-center py-1 px-3" href="#0" @click="dropdownOpen = false">Oldest</a>
           </li>
           <li>
-            <a class="font-medium text-sm text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-200 flex items-center py-1 px-3" href="#0" @click="dropdownOpen = false">Popular</a>
+            <a class="font-medium text-sm text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-200 flex items-center py-1 px-3"
+              href="#0" @click="dropdownOpen = false">Priority</a>
           </li>
         </ul>
       </div> 

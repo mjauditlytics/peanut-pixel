@@ -18,7 +18,7 @@
 
             <!-- Left: Title -->
             <div class="mb-4 sm:mb-0">
-              <h1 class="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold">Project Risks &
+              <h1 class="text-xl md:text-2xl text-slate-800 dark:text-slate-100 font-semibold ">Project Risks &
                 Recommendations ✨ ✨</h1>
             </div>
 
@@ -75,7 +75,8 @@
               <!-- Job list -->
               <div class="space-y-2">
                 <!-- <Editor api-key='your-api-key' :init="{ /* your other settings */ }" /> -->
-                <AuditListItem v-for="(item, index) in auditItems" :key="item.id" :item="item" :index="index" />
+                <AuditListItem v-for="(item, index) in auditItems" :key="item.id" :item="item" :index="index"
+                  @delete="deleteItem" />
               </div>
 
             </div>
@@ -86,9 +87,6 @@
       </main>
 
     </div>
-
-
-
 
 
   </div>
@@ -103,7 +101,7 @@ import { useSessionStorage } from '@vueuse/core';
 // import messageService from '../../services/messages/messageService';
 import messageService from '../../services/messages/fakeMessageService';
 
-// import Sidebar from '../../partials/Sidebar.vue'
+import Sidebar from '../../partials/Sidebar.vue'
 import AuditSidebar from '../../partials/audits/AuditSidebar.vue'
 import Header from '../../partials/Header.vue'
 import DropdownSort from '../../components/DropdownSort.vue'
@@ -117,6 +115,10 @@ const isLoading = ref(false);
 // const status = ref('');
 // const response = ref('');
 let unsubscribe;
+
+const deleteItem = (index) => {
+  auditItems.value.splice(index, 1);
+}
 
 async function addItemsWithDelay(data, auditItems, delay) {
   for (let item of data) {
