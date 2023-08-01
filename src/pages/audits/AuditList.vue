@@ -8,7 +8,7 @@
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
 
       <!-- Site header -->
-      <Header :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
+      <AppHeader :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
 
       <main class="grow">
         <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
@@ -74,10 +74,13 @@
 
               <!-- Job list -->
               <div class="space-y-2">
-                <!-- <Editor api-key='your-api-key' :init="{ /* your other settings */ }" /> -->
+                
                 <AuditListItem v-for="(item, index) in auditItems" :key="item.id" :item="item" :index="index"
                   @delete="deleteItem" />
               </div>
+
+              <div ref="editorContainer" class="border border-gray-300 rounded p-3"></div>
+              <button @click.stop="save">Save</button>
 
             </div>
 
@@ -96,19 +99,94 @@
 
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useSessionStorage } from '@vueuse/core';
-// import Editor from '@tinymce/tinymce-vue'
+import EditorJS from '@editorjs/editorjs';
+import List from '@editorjs/list';
+import Header from '@editorjs/header';
 
 // import messageService from '../../services/messages/messageService';
 import messageService from '../../services/messages/fakeMessageService';
 
+
 import Sidebar from '../../partials/Sidebar.vue'
 import AuditSidebar from '../../partials/audits/AuditSidebar.vue'
-import Header from '../../partials/Header.vue'
+import AppHeader from '../../partials/Header.vue'
 import DropdownSort from '../../components/DropdownSort.vue'
 import AuditListItem from './AuditListItem.vue'
 const sidebarOpen = ref(false)
 
 // const auditItems = ref([]); // id , response, status
+
+
+// const editor = new EditorJS('editorjs');
+
+// const editor = EditorJS({
+//   holder: 'editorjs',
+
+//   tools: {
+    
+//     header: {
+//       class: Header,
+//       shortcut: 'CMD+SHIFT+H',
+//     },
+//     list: {
+//       class: List,
+//       inlineToolbar: true,
+//       config: {
+//         defaultStyle: 'unordered'
+//       }
+//     },
+//   },
+
+// });
+
+
+let editorContainer = ref(null);
+let editor = null;
+
+// const a = "{\n  \"time\": 1621340388122,\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Detailed Findings\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"The cost model currently in use includes a late fee.\",\n          \"This late fee inclusion is in direct violation of the company's established policies.\",\n          \"The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing.\",\n          \"There is no clear documentation or justification provided for the inclusion of this late fee.\",\n          \"The late fee has led to an inflation of costs in the cost model.\"\n        ]\n      }\n    },\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Risks\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"The inclusion of the late fee could lead to inaccurate financial reporting.\",\n          \"The company may face reputational damage for violating its own policies.\",\n          \"Potential legal and regulatory implications if the late fees are deemed unfair or excessive.\"\n        ]\n      }\n    },\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Recommendations\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"Immediate removal of the late fee from the cost model to ensure compliance with company policy.\",\n          \"Conduct a thorough review of all transactions where the late fee was applied and make necessary adjustments.\",\n          \"Implement stronger internal controls to prevent such deviations from company policy in the future.\",\n          \"Provide training to relevant staff about company policies and the importance of adherence.\"\n        ]\n      }\n    }\n  ],\n  \"version\": \"2.19.0\"\n}"
+const b = {
+  "time": 1621340388122,
+  "blocks": [
+    {
+      "type": "header",
+      "data": {
+        "text": "Detailed Findings",
+        "level": 2
+      }
+    },
+    {
+      "type": "list",
+      "data": {
+        "style": "unordered",
+        "items": [
+          "The cost model currently in use includes a late fee."
+        ]
+      }
+    },
+    {
+      "type": "list",
+      "data": {
+        "style": "unordered",
+        "items": [
+          "This late fee inclusion is in direct violation of the company's established policies.",
+          "There is no clear documentation or justification provided for the inclusion of this late fee.",
+          "The late fee has led to an inflation of costs in the cost model."
+        ]
+      }
+    },
+    {
+      "type": "list",
+      "data": {
+        "style": "unordered",
+        "items": [
+          "The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing."
+        ]
+      }
+    }
+  ],
+  "version": "2.19.0"
+}
+ 
 const auditItems = useSessionStorage('auditItems', []);
 const newFinding = ref('school buildings have asbestos');
 const isLoading = ref(false);
@@ -126,7 +204,28 @@ async function addItemsWithDelay(data, auditItems, delay) {
     await new Promise(resolve => setTimeout(resolve, delay));
   }
 }
+
+/**
+ *  //convert this data to My app's structure that MessageService can understand
+  // headings are keys
+ */
+// data.blocks[0].data
+// {text: 'Detailed Findings', level: 2}
+
+// data.blocks[3].data -> {style: 'unordered', items: Array(3)}
+// data.blocks[3].data.items -> (3) ["This inclusion is in direct violation of..",
+          // 'There is no clear documentation or justification provided for the \
+          // inclusion of this late fee.', 'The late fee..']
+
+async function save() {
+  const data = await editor.save();
+  //convert this data to My app's structure that MessageService can understand
+  // headings are keys
+  console.log(data);
+}
 onMounted(async () => {
+
+  
   // Fetch current state from Firestore and subscribe to changes
   unsubscribe = await messageService.listMessages((data) => {
     addItemsWithDelay(data, auditItems, 1000);
@@ -141,6 +240,19 @@ onMounted(async () => {
     //   auditItems.value.push(data);
     // }
   });
+
+  editor = new EditorJS({
+    holder: editorContainer.value,
+    tools: {
+      list: {
+        class: List,
+        inlineToolbar: true, 
+      },
+      header: Header,
+    },
+    data: b //JSON.parse(a)
+  });
+  
 
 });
 
