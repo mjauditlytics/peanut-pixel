@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from "./stores/useAuthStore";
-import Dashboard from './pages/Dashboard.vue'
+// import { useAuthStore } from "./stores/useAuthStore";
+// import Dashboard from './pages/Dashboard.vue'
 
-import FromScratchContainer from './pages/audits/FromScratchContainer.vue'
+// import FromScratchContainer from './pages/audits/FromScratchContainer.vue'
 
 
-import Invoices from './pages/ecommerce/Invoices.vue'
-import Shop2 from './pages/ecommerce/Shop2.vue'
+// import Invoices from './pages/ecommerce/Invoices.vue'
+// import Shop2 from './pages/ecommerce/Shop2.vue'
 import AuditList from './pages/audits/AuditList.vue'
 
 // import Campaigns from './pages/Campaigns.vue'
@@ -16,7 +16,7 @@ import AuditList from './pages/audits/AuditList.vue'
 // import ForumPost from './pages/community/ForumPost.vue'
 // import CreditCards from './pages/finance/CreditCards.vue'
 // import Transactions from './pages/finance/Transactions.vue'
-// import JobListing from './pages/job/JobListing.vue'
+import JobListing from './pages/job/JobListing.vue'
 // import JobPost from './pages/job/JobPost.vue'
 // import CompanyProfile from './pages/job/CompanyProfile.vue'
 // import Messages from './pages/Messages.vue'
@@ -30,8 +30,8 @@ import AuditList from './pages/audits/AuditList.vue'
 // import EmptyState from './pages/utility/EmptyState.vue'
 import PageNotFound from './pages/utility/PageNotFound.vue'
 // import KnowledgeBase from './pages/utility/KnowledgeBase.vue'
-import Signin from './pages/Signin.vue'
-import Signup from './pages/Signup.vue'
+// import Signin from './pages/Signin.vue'
+// import Signup from './pages/Signup.vue'
 // import ResetPassword from './pages/ResetPassword.vue'
 // import Onboarding01 from './pages/Onboarding01.vue'
 // import Onboarding02 from './pages/Onboarding02.vue'
@@ -56,37 +56,41 @@ const routerHistory = createWebHistory()
 const router = createRouter({
   history: routerHistory,
   routes: [
-    {
-      path: '/',
-      component: Dashboard,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/dashboard',
-      component: Dashboard,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/audits/scratch/start',
-      component: FromScratchContainer
-    },
-    {
-      path: '/signin',
-      component: Signin
-    },
-    {
-      path: '/signup',
-      component: Signup
-    },
+    // {
+    //   path: '/',
+    //   component: Dashboard,
+    //   meta: {
+    //     requiresAuth: true
+    //   }
+    // },
+    // {
+    //   path: '/dashboard',
+    //   component: Dashboard,
+    //   meta: {
+    //     requiresAuth: true
+    //   }
+    // },
+    // {
+    //   path: '/audits/scratch/start',
+    //   component: FromScratchContainer
+    // },
+    // {
+    //   path: '/signin',
+    //   component: Signin
+    // },
+    // {
+    //   path: '/signup',
+    //   component: Signup
+    // },
     // {
     //   path: '/reset-password',
     //   component: ResetPassword
     // },
+    {
+      path: '/audits',
+      component: AuditList
 
+    },
     // {
     //   path: '/onboarding-01',
     //   component: Onboarding01
@@ -103,19 +107,15 @@ const router = createRouter({
     //   path: '/onboarding-04',
     //   component: Onboarding04
     // },
-    {
-      path: '/ecommerce/invoices',
-      component: Invoices
-    },
-    {
-      path: '/ecommerce/shop-2',
-      component: Shop2
-    },
-    {
-      path: '/ecommerce/project-audit-list',
-      component: AuditList
-
-    },
+    // {
+    //   path: '/ecommerce/invoices',
+    //   component: Invoices
+    // },
+    // {
+    //   path: '/ecommerce/shop-2',
+    //   component: Shop2
+    // },
+   
     // {
     //   path: '/campaigns',
     //   component: Campaigns
@@ -144,10 +144,10 @@ const router = createRouter({
     //   path: '/finance/transactions',
     //   component: Transactions
     // },
-    // {
-    //   path: '/job/job-listing',
-    //   component: JobListing
-    // },
+    {
+      path: '/job/job-listing',
+      component: JobListing
+    },
     // {
     //   path: '/job/job-post',
     //   component: JobPost
@@ -269,14 +269,14 @@ const router = createRouter({
 //   } 
 // })
 
-router.beforeEach(async (to, from, next) => {
-  let currentUser = await useAuthStore().getCurrentUser();
+// router.beforeEach(async (to, from, next) => {
+//   let currentUser = await useAuthStore().getCurrentUser();
 
-  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  //page does not require auth and user is not logged in
-  if (requiresAuth && !currentUser) next("/signIn");
-  // else if (!requiresAuth && currentUser) next("/generator");
-  else next();
-});
+//   let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+//   //page does not require auth and user is not logged in
+//   if (requiresAuth && !currentUser) next("/signIn");
+//   // else if (!requiresAuth && currentUser) next("/generator");
+//   else next();
+// });
 
 export default router

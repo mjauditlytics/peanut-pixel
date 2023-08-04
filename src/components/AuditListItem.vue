@@ -183,8 +183,8 @@
 </template>
 <script setup>
 import { ref, computed } from 'vue';
-import ModalBlank from '../../components/ModalBlank.vue'
-import ModalBasic from '../../components/ModalBasic.vue'
+import ModalBlank from './ModalBlank.vue'
+import ModalBasic from './ModalBasic.vue'
 // Define 'item' prop
 const props = defineProps({
   item: {

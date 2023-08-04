@@ -35,7 +35,7 @@
             </button>          
             <SearchModal id="search-modal" searchId="search" :modalOpen="searchModalOpen" @open-modal="searchModalOpen = true" @close-modal="searchModalOpen = false" />
           </div>
-          <Notifications align="right" />
+          <!-- <Notifications align="right" /> -->
           <Help align="right" />
           <ThemeToggle />
           <!-- Divider -->
@@ -53,7 +53,7 @@
 import { ref } from 'vue'
 
 import SearchModal from '../components/ModalSearch.vue'
-import Notifications from '../components/DropdownNotifications.vue'
+// import Notifications from '../components/DropdownNotifications.vue'
 import Help from '../components/DropdownHelp.vue'
 import ThemeToggle from '../components/ThemeToggle.vue'
 import UserMenu from '../components/DropdownProfile.vue'
@@ -63,7 +63,7 @@ export default {
   props: ['sidebarOpen'],
   components: {
     SearchModal,
-    Notifications,
+    // Notifications,
     Help,
     ThemeToggle,
     UserMenu,

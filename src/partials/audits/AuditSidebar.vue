@@ -135,39 +135,30 @@
         </div>
         <!-- Group 4 -->
         <div>
-          <div class="text-sm text-slate-800 dark:text-slate-100 font-semibold mb-3">Immigration</div>
+          <div class="text-sm text-slate-800 dark:text-slate-100 font-semibold mb-3">Available Templates</div>
           <div class="flex items-center">
             <div class="form-switch">
-              <input type="checkbox" id="immigration-toggle" class="sr-only" v-model="immigrationSetting" true-value="On"
+              <input type="checkbox" id="immigration-toggle" class="sr-only" v-model="profileSetting" true-value="On"
                 false-value="Off" />
               <label class="bg-slate-400 dark:bg-slate-700" for="immigration-toggle">
                 <span class="bg-white shadow-sm" aria-hidden="true"></span>
                 <span class="sr-only">Immigration</span>
               </label>
             </div>
-            <div class="text-sm text-slate-400 dark:text-slate-500 italic ml-2">{{ immigrationSetting }}</div>
+            <div class="text-sm text-slate-400 dark:text-slate-500 italic ml-2">{{ profileSetting }}</div>
           </div>
-          <div class="text-sm dark:text-slate-500 italic mt-3">Only show companies that can sponsor a visa</div>
+          <div class="text-sm dark:text-slate-500 italic mt-3">Only show my templates </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  name: 'JobSidebar',
-  setup() {
+// const companySetting = ref('On')
+const profileSetting = ref('Off')
 
-    const companySetting = ref('On')
-    const immigrationSetting = ref('Off')
 
-    return {
-      companySetting,
-      immigrationSetting,
-    }
-  }
-}
 </script>

@@ -2,7 +2,7 @@
   <div class="flex h-[100dvh] overflow-hidden">
 
     <!-- Sidebar -->
-    <!-- <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" /> -->
+    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" />
 
     <!-- Content area -->
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
@@ -79,8 +79,8 @@
                   @delete="deleteItem" />
               </div>
 
-              <div ref="editorContainer" class="border border-gray-300 rounded p-3"></div>
-              <button @click.stop="save">Save</button>
+              <!-- <div ref="editorContainer" class="border border-gray-300 rounded p-3"></div> -->
+              <!-- <button @click.stop="save">Save</button> -->
 
             </div>
 
@@ -99,22 +99,20 @@
 
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useSessionStorage } from '@vueuse/core';
-import EditorJS from '@editorjs/editorjs';
-import List from '@editorjs/list';
-import Header from '@editorjs/header';
+// import EditorJS from '@editorjs/editorjs';
+// import List from '@editorjs/list';
+// import Header from '@editorjs/header';
 
 // import messageService from '../../services/messages/messageService';
 import messageService from '../../services/messages/fakeMessageService';
-
 
 import Sidebar from '../../partials/Sidebar.vue'
 import AuditSidebar from '../../partials/audits/AuditSidebar.vue'
 import AppHeader from '../../partials/Header.vue'
 import DropdownSort from '../../components/DropdownSort.vue'
-import AuditListItem from './AuditListItem.vue'
-const sidebarOpen = ref(false)
+import AuditListItem from '../../components/AuditListItem.vue'
 
-// const auditItems = ref([]); // id , response, status
+const sidebarOpen = ref(false)
 
 
 // const editor = new EditorJS('editorjs');
@@ -140,52 +138,52 @@ const sidebarOpen = ref(false)
 // });
 
 
-let editorContainer = ref(null);
-let editor = null;
+// let editorContainer = ref(null);
+// let editor = null;
 
 // const a = "{\n  \"time\": 1621340388122,\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Detailed Findings\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"The cost model currently in use includes a late fee.\",\n          \"This late fee inclusion is in direct violation of the company's established policies.\",\n          \"The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing.\",\n          \"There is no clear documentation or justification provided for the inclusion of this late fee.\",\n          \"The late fee has led to an inflation of costs in the cost model.\"\n        ]\n      }\n    },\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Risks\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"The inclusion of the late fee could lead to inaccurate financial reporting.\",\n          \"The company may face reputational damage for violating its own policies.\",\n          \"Potential legal and regulatory implications if the late fees are deemed unfair or excessive.\"\n        ]\n      }\n    },\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Recommendations\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"Immediate removal of the late fee from the cost model to ensure compliance with company policy.\",\n          \"Conduct a thorough review of all transactions where the late fee was applied and make necessary adjustments.\",\n          \"Implement stronger internal controls to prevent such deviations from company policy in the future.\",\n          \"Provide training to relevant staff about company policies and the importance of adherence.\"\n        ]\n      }\n    }\n  ],\n  \"version\": \"2.19.0\"\n}"
-const b = {
-  "time": 1621340388122,
-  "blocks": [
-    {
-      "type": "header",
-      "data": {
-        "text": "Detailed Findings",
-        "level": 2
-      }
-    },
-    {
-      "type": "list",
-      "data": {
-        "style": "unordered",
-        "items": [
-          "The cost model currently in use includes a late fee."
-        ]
-      }
-    },
-    {
-      "type": "list",
-      "data": {
-        "style": "unordered",
-        "items": [
-          "This late fee inclusion is in direct violation of the company's established policies.",
-          "There is no clear documentation or justification provided for the inclusion of this late fee.",
-          "The late fee has led to an inflation of costs in the cost model."
-        ]
-      }
-    },
-    {
-      "type": "list",
-      "data": {
-        "style": "unordered",
-        "items": [
-          "The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing."
-        ]
-      }
-    }
-  ],
-  "version": "2.19.0"
-}
+// const b = {
+//   "time": 1621340388122,
+//   "blocks": [
+//     {
+//       "type": "header",
+//       "data": {
+//         "text": "Detailed Findings",
+//         "level": 2
+//       }
+//     },
+//     {
+//       "type": "list",
+//       "data": {
+//         "style": "unordered",
+//         "items": [
+//           "The cost model currently in use includes a late fee."
+//         ]
+//       }
+//     },
+//     {
+//       "type": "list",
+//       "data": {
+//         "style": "unordered",
+//         "items": [
+//           "This late fee inclusion is in direct violation of the company's established policies.",
+//           "There is no clear documentation or justification provided for the inclusion of this late fee.",
+//           "The late fee has led to an inflation of costs in the cost model."
+//         ]
+//       }
+//     },
+//     {
+//       "type": "list",
+//       "data": {
+//         "style": "unordered",
+//         "items": [
+//           "The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing."
+//         ]
+//       }
+//     }
+//   ],
+//   "version": "2.19.0"
+// }
  
 const auditItems = useSessionStorage('auditItems', []);
 const newFinding = ref('school buildings have asbestos');
@@ -198,7 +196,10 @@ const deleteItem = (index) => {
   auditItems.value.splice(index, 1);
 }
 
-async function addItemsWithDelay(data, auditItems, delay) {
+async function addItemsWithDelay(data, auditItems, delay, newList = false) {
+  if (newList) {
+    auditItems.value = [];
+  }
   for (let item of data) {
     auditItems.value.push(item);
     await new Promise(resolve => setTimeout(resolve, delay));
@@ -217,41 +218,33 @@ async function addItemsWithDelay(data, auditItems, delay) {
           // 'There is no clear documentation or justification provided for the \
           // inclusion of this late fee.', 'The late fee..']
 
-async function save() {
-  const data = await editor.save();
-  //convert this data to My app's structure that MessageService can understand
-  // headings are keys
-  console.log(data);
-}
+// async function save() {
+//   const data = await editor.save();
+//   //convert this data to My app's structure that MessageService can understand
+//   // headings are keys
+//   console.log(data);
+// }
 onMounted(async () => {
-
+  // only if data has changed in backend
+  // const timestamps = auditItems.value.map(item => item.timestamp);
+  // const maxTimestamp = Math.max(...timestamps);
   
   // Fetch current state from Firestore and subscribe to changes
   unsubscribe = await messageService.listMessages((data) => {
-    addItemsWithDelay(data, auditItems, 1000);
-    // console.log(data)
-    // // Check if the document is already in the array
-    // const index = auditItems.value.findIndex(item => item.timestamp === data.timestamp);
-    // if (index !== -1) {
-    //   // If the document is already in the array, update it
-    //   auditItems.value[index] = data;
-    // } else {
-    //   // If the document is not in the array, add it
-    //   auditItems.value.push(data);
-    // }
+    addItemsWithDelay(data, auditItems, 1000, true); 
   });
 
-  editor = new EditorJS({
-    holder: editorContainer.value,
-    tools: {
-      list: {
-        class: List,
-        inlineToolbar: true, 
-      },
-      header: Header,
-    },
-    data: b //JSON.parse(a)
-  });
+  // editor = new EditorJS({
+  //   holder: editorContainer.value,
+  //   tools: {
+  //     list: {
+  //       class: List,
+  //       inlineToolbar: true, 
+  //     },
+  //     header: Header,
+  //   },
+  //   data: b //JSON.parse(a)
+  // });
   
 
 });
