@@ -38,34 +38,24 @@
               <div class="space-y-4">
                 <div>
                   <label class="block text-sm font-medium mb-1" for="email">Email Address <span class="text-rose-500">*</span></label>
-                  <input id="email" class="form-input w-full" type="email" />
+                  <input id="email" class="form-input w-full" type="email" v-model="email"/>
                 </div>
                 <div>
                   <label class="block text-sm font-medium mb-1" for="name">Full Name <span class="text-rose-500">*</span></label>
-                  <input id="name" class="form-input w-full" type="text" />
+                  <input id="username" class="form-input w-full" type="text" v-model="username" />
                 </div>
-                <div>
-                  <label class="block text-sm font-medium mb-1" for="role">Your Role <span class="text-rose-500">*</span></label>
-                  <select id="role" class="form-select w-full">
-                    <option>Designer</option>
-                    <option>Developer</option>
-                    <option>Accountant</option>
-                  </select>
-                </div>
+              
                 <div>
                   <label class="block text-sm font-medium mb-1" for="password">Password</label>
-                  <input id="password" class="form-input w-full" type="password" autoComplete="on" />
+                  <input id="password" class="form-input w-full" type="password" autoComplete="on" v-model="password" />
                 </div>
               </div>
               <div class="flex items-center justify-between mt-6">
-                <div class="mr-1">
-                  <label class="flex items-center">
-                    <input type="checkbox" class="form-checkbox" />
-                    <span class="text-sm ml-2">Email me about product news.</span>
-                  </label>
-                </div>
-                <router-link class="btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3 whitespace-nowrap" to="/">Sign Up</router-link>
+            
+                <button class="text-slate-800 dark:text-slate-100" @click.prevent="signUpWithEmailAndPassword">Sign Up</button>
               </div>
+
+              <div v-if ="errMsg !== ''" class="text-xs mt-1 text-rose-500">{{ errMsg }}</div>
             </form>
             <!-- Footer -->
             <div class="pt-5 mt-6 border-t border-slate-200 dark:border-slate-700">
@@ -89,9 +79,37 @@
   </main>
 </template>
 
-<script>
 
-export default {
-  name: 'Signup',
+<script setup>
+import { ref } from "vue";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useAuthStore } from "../stores/useAuthStore";
+import { useRouter } from "vue-router";
+
+const email = ref("");
+const username = ref("");
+const password = ref("");
+const errMsg = ref("");
+const auth = getAuth();
+  const router = useRouter();
+const signUpWithEmailAndPassword = () => {
+
+  const authStore = useAuthStore();
+
+  createUserWithEmailAndPassword(auth, email.value, password.value)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    authStore.createAndSetUser(user);
+    router.push("/dashboard");
+    // ...
+  })
+  .catch((error) => {
+    // const errorCode = error.code;
+    errMsg.value = error.message;
+    // ..
+  });
 }
+
+
 </script>
