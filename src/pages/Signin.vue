@@ -34,7 +34,7 @@
           </div>          
 
           <div class="max-w-sm mx-auto w-full px-4 py-8">
-            <h1 class="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-6">Welcome back! ✨</h1>
+            <h1 class="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-6">Please Sign in ✨</h1>
             <!-- Form -->
             <form @submit.prevent="signIn">
               <div class="space-y-4">
@@ -49,6 +49,7 @@
                   <div v-if ="errType === 'password'" class="text-xs mt-1 text-rose-500">{{ errMsg }}</div>
                 </div>
               </div>
+              <div v-if ="errMsg !== ''" class="text-xs mt-1 text-rose-500">{{ errMsg }}</div>
               <div class="flex items-center justify-between mt-6">
                 <div class="mr-1">
                   <router-link class="text-sm underline hover:no-underline" to="/reset-password">Forgot Password?</router-link>
@@ -62,7 +63,7 @@
               <button
                 class="align-center px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
                 <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
-                <button @click.prevent="signInWithGoogle">Login with Google</button>
+                <button class="text-slate-800 dark:text-slate-100" @click.prevent="signInWithGoogle">Login with Google</button>
             </button>
           </div>
             <!-- Footer -->
@@ -77,10 +78,10 @@
       </div>
 
       <!-- Image -->
-      <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
+      <!-- <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
         <img class="object-cover object-center w-full h-full" src="../images/auth-image.jpg" width="760" height="1024" alt="Authentication" />
         <img class="absolute top-1/4 left-0 -translate-x-1/2 ml-8 hidden lg:block" src="../images/auth-decoration.png" width="218" height="224" alt="Authentication decoration" />
-      </div>
+      </div> -->
 
     </div>
 
@@ -97,11 +98,13 @@ import {
 } from "firebase/auth";
 
 import { useAuthStore } from "../stores/useAuthStore";
+import { useUserStore } from "../stores/useUserStore";
 
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const authStore = useAuthStore();
+const userStore = useUserStore();
 
 const email = ref("");
 const password = ref("");
@@ -109,8 +112,22 @@ const errMsg = ref();
 const errType = ref(); // username ,  password
 const signInBtnDisabled = computed(() => !email.value || !password.value);
 
-const handlePostLogin = auth => {
+const handlePostLogin = async (auth, checkIfExists) => {
   console.log("Successfully logged in", auth.currentUser);
+  console.log("Do i need to hec? ", checkIfExists)
+  
+  
+  
+  if (checkIfExists) {
+    const userExists = await userStore.doesUserExist(auth.currentUser.uid);
+    if (! userExists) {
+      console.log("User does not exist, creating, and proceeding to dashboard");
+      await authStore.createAndSetUser(auth.currentUser);
+      router.push("/dashboard");
+      return;
+    }
+  }
+    
   authStore.setUser(auth.currentUser);
   router.push("/dashboard");
 };
@@ -118,7 +135,7 @@ const handlePostLogin = auth => {
 const signIn = () => {
   const auth = getAuth();
   signInWithEmailAndPassword(auth, email.value, password.value)
-    .then(data => handlePostLogin(auth))
+    .then(userCredential => handlePostLogin(auth, false))
     .catch(error => {
       console.log("Error signing in", error);
       switch (error.code) {
@@ -139,7 +156,7 @@ const signIn = () => {
           errType.value = "username";
           break;
         default:
-          errMsg.value = "Unknown sign in error";
+          errMsg.value = error.code;
       }
     });
 };
@@ -147,8 +164,11 @@ const signIn = () => {
 const signInWithGoogle = () => {
   const auth = getAuth();
   const googleAuthProvider = new GoogleAuthProvider();
-  signInWithPopup(auth, googleAuthProvider)
-    .then(data => handlePostLogin(auth))
+  // googleAuthProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  signInWithPopup(auth, googleAuthProvider)    
+    .then(data =>
+        handlePostLogin(auth, true)
+     )
     .catch(error => {
       console.log("Error signing in", error);
     });

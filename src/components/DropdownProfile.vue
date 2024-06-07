@@ -7,7 +7,7 @@
       @click.prevent="dropdownOpen = !dropdownOpen"
       :aria-expanded="dropdownOpen"
     >
-      <img class="w-8 h-8 rounded-full" :src="UserAvatar" width="32" height="32" alt="User" />
+      <img class="w-8 h-8 rounded-full" :src="user.photoURL" width="32" height="32" alt="User" />
       <div class="flex items-center truncate">
         <span class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">{{user?.displayName}}</span>
         <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
@@ -48,7 +48,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import UserAvatar from '../images/user-avatar-32.png'
+// import UserAvatar from '../images/user-avatar-32.png'
 import { useRouter } from "vue-router"
 import { useAuthStore } from "../stores/useAuthStore"
 
@@ -64,7 +64,7 @@ const authStore = useAuthStore()
   // },  
   // setup() {
     const user = ref({
-      displayName: "John Doe",
+      displayName: "",
       email: "",
       photoURL: ""
     })
@@ -95,12 +95,14 @@ const authStore = useAuthStore()
       document.addEventListener('keydown', keyHandler)
       
       console.log("Mounted")
-      console.log("user ", user.value)
+      
       user.value = await authStore.getCurrentUser()
+      console.log("user ", user.value)
       const dispName = user.value?.displayName
       const email = user.value?.email
       if (user.value && (!dispName || dispName.length < 1)) {
         user.value.displayName = email?.substring(0, email.indexOf("@"))
+        console.log(user.value.photoURL)
       }      
     })
 

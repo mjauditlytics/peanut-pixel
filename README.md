@@ -1,3 +1,6 @@
+
+# npm run dev
+
 ## Launch features etc :
 https://drive.google.com/drive/u/0/folders/1WD5llEeEoVhXhwdIBHv2cKYgY9yfQa96
 
@@ -11,25 +14,14 @@ https://drive.google.com/drive/u/0/folders/1WD5llEeEoVhXhwdIBHv2cKYgY9yfQa96
 
 
 
-# Peanut Pixel
+# https://console.neon.tech/app/projects/lingering-sun-95144273
+#Project peanutpixel with database survey1 was created successfully.
+*  COnnection string : 
+postgresql://survey1_owner:************@ep-purple-boat-a7tjadcy-pooler.ap-southeast-2.aws.neon.tech/survey1?sslmode=require
 
-AI Powered Auditing
+pak31EvxuwSn
+reader
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run dev
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://vitejs.dev/guide/).
-
+# deploy
+ see firebase_deploy.md
+ 
