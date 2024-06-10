@@ -63,31 +63,16 @@
           <div class="px-4 py-8">
             <div class="max-w-md mx-auto">
 
-              <h1 class="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-6">Company information ✨</h1>
+              <h1 class="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-6">Your information ✨</h1>
               <!-- Form -->
               <form>
                 <div class="space-y-4 mb-8">
                   <!-- Company Name -->
                   <div>
-                    <label class="block text-sm font-medium mb-1" for="company-name">Company Name <span class="text-rose-500">*</span></label>
+                    <label class="block text-sm font-medium mb-1" for="company-name">Your Name <span class="text-rose-500">*</span></label>
                     <input id="company-name" class="form-input w-full" type="text" />
                   </div>
-                  <!-- City and Postal Code -->
-                  <div class="flex space-x-4">
-                    <div class="flex-1">
-                      <label class="block text-sm font-medium mb-1" for="city">City <span class="text-rose-500">*</span></label>
-                      <input id="city" class="form-input w-full" type="text" />
-                    </div>
-                    <div class="flex-1">
-                      <label class="block text-sm font-medium mb-1" for="postal-code">Postal Code <span class="text-rose-500">*</span></label>
-                      <input id="postal-code" class="form-input w-full" type="text" />
-                    </div>
-                  </div>
-                  <!-- Street Address -->
-                  <div>
-                    <label class="block text-sm font-medium mb-1" for="street">Street Address <span class="text-rose-500">*</span></label>
-                    <input id="street" class="form-input w-full" type="text" />
-                  </div>
+                  
                   <!-- Country -->
                   <div>
                     <label class="block text-sm font-medium mb-1" for="country">Country <span class="text-rose-500">*</span></label>
@@ -122,9 +107,7 @@
   </main>
 </template>
 
-<script>
+<script setup>
 
-export default {
-  name: 'Onboarding03',
-}
+
 </script>

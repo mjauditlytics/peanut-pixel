@@ -8,7 +8,7 @@
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
 
       <!-- Site header -->
-      <AppHeader :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
+      <!-- <AppHeader :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" /> -->
 
       <main class="grow">
         <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
@@ -19,7 +19,7 @@
             <!-- Left: Title -->
             <div class="mb-4 sm:mb-0">
               <h1 class="text-xl md:text-2xl text-slate-800 dark:text-slate-100 font-semibold ">Project Risks &
-                Recommendations ✨ ✨</h1>
+                Recommendations ✨</h1>
             </div>
 
             <!-- Post a job button -->
@@ -29,16 +29,18 @@
                   d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
               </svg>
               <span class="hidden xs:block ml-2">Add a finding</span>
+              
+
             </button>
 
           </div>
-
+          <!-- <ModalAudit  :mode="'add'" @addItem="addNewItem"  /> -->
           <!-- Page content -->
           <div
             class="flex flex-col space-y-10 sm:flex-row sm:space-x-6 sm:space-y-0 md:flex-col md:space-x-0 md:space-y-10 xl:flex-row xl:space-x-6 xl:space-y-0 mt-9">
 
             <!-- Sidebar -->
-            <AuditSidebar />
+            <!-- <AuditSidebar /> -->
 
             <!-- Content -->
             <div class="w-full">
@@ -62,21 +64,25 @@
                 </form>
               </div>
 
-              <!-- Jobs header -->
-              <div class="flex justify-between items-center mb-4">
+              <!-- header -->
+              <!-- <div class="flex justify-between items-center mb-4">
                 <div class="text-sm text-slate-500 dark:text-slate-400 italic">Showing 2 results</div>
-                <!-- Sort -->
+              
                 <div class="text-sm">
                   <span>Sort by </span>
                   <DropdownSort align="right" />
                 </div>
-              </div>
+              </div> -->
 
-              <!-- Job list -->
+              <!-- Audit Items list -->
               <div class="space-y-2">
                 
                 <AuditListItem v-for="(item, index) in auditItems" :key="item.id" :item="item" :index="index"
-                  @delete="deleteItem" />
+                 
+                  />
+                  <!-- @update="updateItem" @delete="deleteItem"   -->
+                  <!-- :audit-modal-open="auditModalOpen"                  -->
+                  <!-- @close="handleModalClose"     -->
               </div>
 
               <!-- <div ref="editorContainer" class="border border-gray-300 rounded p-3"></div> -->
@@ -98,112 +104,89 @@
 <script setup>
 
 import { onMounted, onUnmounted, ref } from 'vue';
-import { useSessionStorage } from '@vueuse/core';
+import { useMessageStore } from '../../stores/messageStore';
+
+// import { useModalStore } from '../../stores/useModalStore';
+
+// const modalStore = useModalStore();
+// const auditModalOpen = ref(false);
+
+
+// import { useSessionStorage } from '@vueuse/core';
 // import EditorJS from '@editorjs/editorjs';
 // import List from '@editorjs/list';
 // import Header from '@editorjs/header';
 
 // import messageService from '../../services/messages/messageService';
-import messageService from '../../services/messages/fakeMessageService';
+// import messageService from '../../services/messages/fakeMessageService';
 
 import Sidebar from '../../partials/Sidebar.vue'
-import AuditSidebar from '../../partials/audits/AuditSidebar.vue'
-import AppHeader from '../../partials/Header.vue'
-import DropdownSort from '../../components/DropdownSort.vue'
+// import ModalAudit from '../../components/ModalAudit.vue'
+// import AuditSidebar from '../../partials/audits/AuditSidebar.vue'
+// import AppHeader from '../../partials/Header.vue'
+// import DropdownSort from '../../components/DropdownSort.vue'
 import AuditListItem from '../../components/AuditListItem.vue'
 
 const sidebarOpen = ref(false)
+const messageStore = useMessageStore();
+const auditItems = ref(messageStore.items); //useSessionStorage('auditItems', []);
 
-
-// const editor = new EditorJS('editorjs');
-
-// const editor = EditorJS({
-//   holder: 'editorjs',
-
-//   tools: {
-    
-//     header: {
-//       class: Header,
-//       shortcut: 'CMD+SHIFT+H',
-//     },
-//     list: {
-//       class: List,
-//       inlineToolbar: true,
-//       config: {
-//         defaultStyle: 'unordered'
-//       }
-//     },
-//   },
-
-// });
-
-
-// let editorContainer = ref(null);
-// let editor = null;
-
-// const a = "{\n  \"time\": 1621340388122,\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Detailed Findings\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"The cost model currently in use includes a late fee.\",\n          \"This late fee inclusion is in direct violation of the company's established policies.\",\n          \"The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing.\",\n          \"There is no clear documentation or justification provided for the inclusion of this late fee.\",\n          \"The late fee has led to an inflation of costs in the cost model.\"\n        ]\n      }\n    },\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Risks\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"The inclusion of the late fee could lead to inaccurate financial reporting.\",\n          \"The company may face reputational damage for violating its own policies.\",\n          \"Potential legal and regulatory implications if the late fees are deemed unfair or excessive.\"\n        ]\n      }\n    },\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Recommendations\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"Immediate removal of the late fee from the cost model to ensure compliance with company policy.\",\n          \"Conduct a thorough review of all transactions where the late fee was applied and make necessary adjustments.\",\n          \"Implement stronger internal controls to prevent such deviations from company policy in the future.\",\n          \"Provide training to relevant staff about company policies and the importance of adherence.\"\n        ]\n      }\n    }\n  ],\n  \"version\": \"2.19.0\"\n}"
-// const b = {
-//   "time": 1621340388122,
-//   "blocks": [
-//     {
-//       "type": "header",
-//       "data": {
-//         "text": "Detailed Findings",
-//         "level": 2
-//       }
-//     },
-//     {
-//       "type": "list",
-//       "data": {
-//         "style": "unordered",
-//         "items": [
-//           "The cost model currently in use includes a late fee."
-//         ]
-//       }
-//     },
-//     {
-//       "type": "list",
-//       "data": {
-//         "style": "unordered",
-//         "items": [
-//           "This late fee inclusion is in direct violation of the company's established policies.",
-//           "There is no clear documentation or justification provided for the inclusion of this late fee.",
-//           "The late fee has led to an inflation of costs in the cost model."
-//         ]
-//       }
-//     },
-//     {
-//       "type": "list",
-//       "data": {
-//         "style": "unordered",
-//         "items": [
-//           "The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing."
-//         ]
-//       }
-//     }
-//   ],
-//   "version": "2.19.0"
-// }
- 
-const auditItems = useSessionStorage('auditItems', []);
 const newFinding = ref('school buildings have asbestos');
 const isLoading = ref(false);
 // const status = ref('');
 // const response = ref('');
-let unsubscribe;
+// let unsubscribe;
+
+
+// const handleModalClose = () => {
+//   modalStore.closeModal();
+// };
+
+// const closeModal = () => {
+//   console.log(" parent close")
+//   auditModalOpen.value = false;
+//   console.log(" parent modal valyue" ,auditModalOpen.value  )
+// }
 
 const deleteItem = (index) => {
-  auditItems.value.splice(index, 1);
+  console.log("delete was clicled");
+  // auditModalOpen.value = false;
+  // auditItems.value.splice(index, 1);
+}
+const updateItem = (item) => {
+  // auditItems.value.splice(index, 1);
+  console.log("update was clicled")
+  // auditModalOpen.value = false;
 }
 
-async function addItemsWithDelay(data, auditItems, delay, newList = false) {
-  if (newList) {
-    auditItems.value = [];
+// async function addItemsWithDelay(data, auditItems, delay, newList = false) {
+//   if (newList) {
+//     auditItems.value = [];
+//   }
+//   for (let item of data) {
+//     auditItems.value.push(item);
+//     await new Promise(resolve => setTimeout(resolve, delay));
+//   }
+// }
+async function addNewItem(item) {
+  isLoading.value = true;
+  const item3 = {
+    id: 3,
+    audit_answers: {
+      finding: "cc333c c ",
+      detailed_finding: "CC333 BBC",
+      risk: "risk 333333333 CC BBC",
+      recommendation: "BBC 333333333 CC recommendation",
+      riskRating: "Very High",
+    },
+    
+    detailed_finding_status: "complete",
+
+    timestamp: new Date()
   }
-  for (let item of data) {
-    auditItems.value.push(item);
-    await new Promise(resolve => setTimeout(resolve, delay));
-  }
+  messageStore.addMessage(item2);
+  // const data = await messageService.createMessage(newFinding.value);
+
 }
 
 /**
@@ -225,15 +208,21 @@ async function addItemsWithDelay(data, auditItems, delay, newList = false) {
 //   console.log(data);
 // }
 onMounted(async () => {
-  // only if data has changed in backend
+ 
+  auditItems.value =await messageStore.fetchMessages();
+  console.log("onMounted AudLisat");
+  console.table(auditItems.value )
+   // only if data has changed in backend
   // const timestamps = auditItems.value.map(item => item.timestamp);
   // const maxTimestamp = Math.max(...timestamps);
   
   // Fetch current state from Firestore and subscribe to changes
-  unsubscribe = await messageService.listMessages((data) => {
-    addItemsWithDelay(data, auditItems, 1000, true); 
-  });
+  // unsubscribe = await messageService.listMessages((data) => {
+  //   addItemsWithDelay(data, auditItems, 1000, true); 
+  // });
 
+
+  // auditItems.value = messageStore.messages;
   // editor = new EditorJS({
   //   holder: editorContainer.value,
   //   tools: {
@@ -251,9 +240,9 @@ onMounted(async () => {
 
 
 onUnmounted(() => {
-  if (unsubscribe) {
-    unsubscribe();
-  }
+  // if (unsubscribe) {
+  //   unsubscribe();
+  // }
 });
 
 // const createMessage = async () => {
@@ -351,5 +340,78 @@ onUnmounted(() => {
 // </div>
 
 // <AuditListItem v-for="(item, index) in auditItems" :key="item.id" :item="item" :index="index" />
+
+
+// const editor = new EditorJS('editorjs');
+
+// const editor = EditorJS({
+//   holder: 'editorjs',
+
+//   tools: {
+    
+//     header: {
+//       class: Header,
+//       shortcut: 'CMD+SHIFT+H',
+//     },
+//     list: {
+//       class: List,
+//       inlineToolbar: true,
+//       config: {
+//         defaultStyle: 'unordered'
+//       }
+//     },
+//   },
+
+// });
+
+
+// let editorContainer = ref(null);
+// let editor = null;
+
+// const a = "{\n  \"time\": 1621340388122,\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Detailed Findings\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"The cost model currently in use includes a late fee.\",\n          \"This late fee inclusion is in direct violation of the company's established policies.\",\n          \"The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing.\",\n          \"There is no clear documentation or justification provided for the inclusion of this late fee.\",\n          \"The late fee has led to an inflation of costs in the cost model.\"\n        ]\n      }\n    },\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Risks\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"The inclusion of the late fee could lead to inaccurate financial reporting.\",\n          \"The company may face reputational damage for violating its own policies.\",\n          \"Potential legal and regulatory implications if the late fees are deemed unfair or excessive.\"\n        ]\n      }\n    },\n    {\n      \"type\": \"header\",\n      \"data\": {\n        \"text\": \"Recommendations\",\n        \"level\": 2\n      }\n    },\n    {\n      \"type\": \"list\",\n      \"data\": {\n        \"style\": \"unordered\",\n        \"items\": [\n          \"Immediate removal of the late fee from the cost model to ensure compliance with company policy.\",\n          \"Conduct a thorough review of all transactions where the late fee was applied and make necessary adjustments.\",\n          \"Implement stronger internal controls to prevent such deviations from company policy in the future.\",\n          \"Provide training to relevant staff about company policies and the importance of adherence.\"\n        ]\n      }\n    }\n  ],\n  \"version\": \"2.19.0\"\n}"
+// const b = {
+//   "time": 1621340388122,
+//   "blocks": [
+//     {
+//       "type": "header",
+//       "data": {
+//         "text": "Detailed Findings",
+//         "level": 2
+//       }
+//     },
+//     {
+//       "type": "list",
+//       "data": {
+//         "style": "unordered",
+//         "items": [
+//           "The cost model currently in use includes a late fee."
+//         ]
+//       }
+//     },
+//     {
+//       "type": "list",
+//       "data": {
+//         "style": "unordered",
+//         "items": [
+//           "This late fee inclusion is in direct violation of the company's established policies.",
+//           "There is no clear documentation or justification provided for the inclusion of this late fee.",
+//           "The late fee has led to an inflation of costs in the cost model."
+//         ]
+//       }
+//     },
+//     {
+//       "type": "list",
+//       "data": {
+//         "style": "unordered",
+//         "items": [
+//           "The late fee has been applied indiscriminately across all transactions, regardless of their nature or timing."
+//         ]
+//       }
+//     }
+//   ],
+//   "version": "2.19.0"
+// }
+ 
+
 </script>
 

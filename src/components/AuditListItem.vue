@@ -27,7 +27,7 @@
 
         </div>
         <!-- Nested checkboxes -->
-        <div class="px-4">
+        <div  v-if="item.detailed_finding" class="px-4">
 
 
           <label class="flex items-center">
@@ -66,7 +66,7 @@
         </div>
         <div class="m-1.5">
 
-          <button @click.stop="auditModalOpen = true"
+          <button @click.prevent="openModal"
             class="btn dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-600 dark:text-slate-300">
             <svg class="w-4 h-4 fill-current text-slate-500 dark:text-slate-400 shrink-0" viewBox="0 0 16 16">
               <path
@@ -75,9 +75,9 @@
             <span class="ml-2">Edit</span>
           </button>
 
-          <ModalBasic id="audit-modal" :modalOpen="auditModalOpen" @close-modal="auditModalOpen = false"
+          <!-- <ModalBasic id="audit-modal" :modalOpen="auditModalOpen" @close-modal="auditModalOpen = false"
             title="Edit Finding Details">
-            <!-- Modal content -->
+
             <div class="px-5 py-4">
               <div class="space-y-3">
 
@@ -98,7 +98,7 @@
                 </div>
               </div>
             </div>
-            <!-- Modal footer -->
+            
             <div class="px-5 py-4 border-t border-slate-200 dark:border-slate-700">
               <div class="flex flex-wrap justify-end space-x-2">
                 <button
@@ -107,9 +107,17 @@
                 <button class="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white">Save</button>
               </div>
             </div>
-          </ModalBasic>
+          </ModalBasic> -->
+
           <!-- Start -->
-          <!-- <ModalAudit :item="item" /> -->
+           <ModalAudit :item="item" :mode="'edit'"
+              :audit-modal-open="auditModalOpen" @close="closeModal()"
+            /> 
+            <!--   -->
+            <!-- @close="closeModal()"
+               @updateItem="$emit('update', item)" -->
+
+            <!-- -->
           <!-- <button
             class="btn dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-600 dark:text-slate-300">
             <svg class="w-4 h-4 fill-current text-slate-500 dark:text-slate-400 shrink-0" viewBox="0 0 16 16">
@@ -120,21 +128,13 @@
           </button> -->
           <!-- End -->
         </div>
-        <!-- Attach button -->
-        <button class="text-slate-400 dark:text-slate-500 hover:text-indigo-500 dark:hover:text-indigo-500">
-          <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
-            <path
-              d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0zM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2z" />
-          </svg>
-        </button>
-
 
         <!-- Danger Modal -->
         <div class="m-1.5">
           <!-- Start -->
           <button
             class="btn dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-rose-800 dark:text-rose-400 hover:bg-rose-400 dark:hover:bg-rose-100"
-            aria-controls="danger-modal" @click.stop="dangerModalOpen = true">
+            aria-controls="danger-modal" @click.prevent="dangerModalOpen = true">
             <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 16 16">
               <path
                 d="M5 7h2v6H5V7zm4 0h2v6H9V7zm3-6v2h4v2h-1v10c0 .6-.4 1-1 1H2c-.6 0-1-.4-1-1V5H0V3h4V1c0-.6.4-1 1-1h6c.6 0 1 .4 1 1zM6 2v1h4V2H6zm7 3H3v9h10V5z" />
@@ -167,8 +167,8 @@
                 <div class="flex flex-wrap justify-end space-x-2">
                   <button
                     class="btn-sm border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-600 dark:text-slate-300"
-                    @click.stop="dangerModalOpen = false">Cancel</button>
-                  <button @click.stop="$emit('delete', index)" class="btn-sm bg-rose-500 hover:bg-rose-600 text-white">Yes, Delete it</button>
+                    @click.prevent="dangerModalOpen = false">Cancel</button>
+                  <!-- <button @click.prevent="$emit('delete', index)" class="btn-sm bg-rose-500 hover:bg-rose-600 text-white">Yes, Delete it</button> -->
                 </div>
               </div>
             </div>
@@ -184,7 +184,15 @@
 <script setup>
 import { ref, computed } from 'vue';
 import ModalBlank from './ModalBlank.vue'
-import ModalBasic from './ModalBasic.vue'
+// import ModalBasic from './ModalBasic.vue'
+import ModalAudit from './ModalAudit.vue'
+import { useModalStore } from '../stores/useModalStore';
+
+const modalStore = useModalStore();
+const auditModalOpen = ref(modalStore.$state.auditModalOpen)
+
+// const emit = defineEmits(['close','close-audit-modal', 'update', 'delete']); // Declare the custom events
+
 // Define 'item' prop
 const props = defineProps({
   item: {
@@ -195,10 +203,47 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  // auditModalOpen: {
+  //   type: Boolean,
+  //   required: true,
+  //   // default: false
+  // },
 });
+// const modalOpen = ref(props.auditModalOpen);
+
+// // Watch for changes to the prop
+// watch(
+//   () => props.auditModalOpen,
+//   (newVal, oldVal) => {
+//     console.log(`New value: ${newVal}, Old value: ${oldVal}`);
+//     modalOpen.value = newVal; // Update the local state if needed
+//   }
+// );
+
+const closeModal = () =>{
+  console.log('ModalAudit: close modal');
+  modalStore.closeModal();
+  // emit('close-audit-modal')
+  // emit('close', false)
+}
+
+const openModal = () =>{
+  console.log('ModalAudit: open modal');
+  modalStore.openModal();
+  // emit('close-audit-modal')
+  // emit('close', false)
+}
+
+// const closeModal = () =>{
+//   console.log("child close modal")
+//   // emit('close', false)
+//   modalStore.oModal();
+//   console.log("child  modal value", props.auditModalOpen)
+//   console.log("child Prop Ref ",modalOpen.value )
+// }
 
 const isEditing = ref(false);
-const auditModalOpen = ref(false);
+// const auditModalOpen = ref(false);
 const dangerModalOpen = ref(false)
 
 const riskClass = computed(() => {
