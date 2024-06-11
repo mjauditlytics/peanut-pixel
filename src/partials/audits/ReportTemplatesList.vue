@@ -280,6 +280,6 @@
 
 <script>
 export default {
-  name: 'ShopCards07',
+  name: 'ReportTemplatesList',
 }
 </script>
