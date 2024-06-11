@@ -7,28 +7,24 @@ import {
   // persistentSingleTabManager
 } from "firebase/firestore";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCkZPJsYdh7-4mcsuiPszvVERSwDOBKb74",
-//   authDomain: "vue-routes-authentication.firebaseapp.com",
-//   databaseURL: "https://vue-routes-authentication.firebaseio.com",
-//   projectId: "vue-routes-authentication",
-//   storageBucket: "vue-routes-authentication.appspot.com",
-//   messagingSenderId: "680655489437",
-//   appId: "1:680655489437:web:9d66d2b0f438e3e9014774",
-//   measurementId: "G-CGL0FS2DVQ",
-// };
+// import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDIE2zCgP1mCRrxXFf-UjqTn_dpoPeD-Ew",
-  authDomain: "iaai-a4d22.firebaseapp.com",
-  projectId: "iaai-a4d22",
-  storageBucket: "iaai-a4d22.appspot.com",
-  messagingSenderId: "452447997044",
-  appId: "1:452447997044:web:c130d19379fc136101d521"
+  apiKey: "AIzaSyCER0UOfAMTg73n36vUJQ8KpXJ73h2Dx2M",
+  authDomain: "saasproject2024-e91a4.firebaseapp.com",
+  projectId: "saasproject2024-e91a4",
+  storageBucket: "saasproject2024-e91a4.appspot.com",
+  messagingSenderId: "679377082208",
+  appId: "1:679377082208:web:351b6778e727ff16aff005",
+  // measurementId: "G-8H7P5GHTS8"
 };
+
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
-
+// const analytics = getAnalytics(app);
 export { firebaseApp, db };
-
 

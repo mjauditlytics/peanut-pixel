@@ -56,7 +56,7 @@
               <!-- Cards 1 (Video Courses) -->
               <div>
                 <div class="grid grid-cols-12 gap-6">
-                  <ShopCards07 />
+                  <ReportTemplatesList />
                 </div>
               </div>
 
@@ -82,7 +82,7 @@ import { ref } from 'vue'
 import Sidebar from '../../partials/Sidebar.vue'
 import Header from '../../partials/Header.vue'
 import ShopSidebar from '../../partials/ecommerce/ShopSidebar.vue'
-import ShopCards07 from '../../partials/ecommerce/ShopCards07.vue'
+import ReportTemplatesList from '../../partials/audits/ReportTemplatesList.vue'
 import PaginationClassic from '../../components/PaginationClassic.vue'
 
 export default {
@@ -91,7 +91,7 @@ export default {
     Sidebar,
     Header,
     ShopSidebar,
-    ShopCards07,    
+    ReportTemplatesList,    
     PaginationClassic,
   },
   setup() {
