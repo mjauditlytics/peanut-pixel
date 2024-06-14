@@ -19,29 +19,31 @@
                   </label>
                 </div>
               </th>
-              <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+              <!-- <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <div class="font-semibold text-left">Invoice</div>
               </th>
+  -->
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left">Total</div>
+                <div class="font-semibold text-left">Client</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left">Status</div>
+                <div class="font-semibold text-left">Audit Name</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left">Customer</div>
-              </th>
-              <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left">Issued on</div>
-              </th>
-              <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left">Paid on</div>
+                <div class="font-semibold text-left">Staff</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <div class="font-semibold text-left">Type</div>
-              </th>
+              </th>              
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left">Actions</div>
+                <div class="font-semibold text-left">Priority</div>
+              </th>
+  
+              <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                <div class="font-semibold text-left">Due Date</div>
+              </th>              
+              <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                <div class="font-semibold text-left">Status</div>
               </th>
             </tr>
           </thead>
@@ -84,13 +86,38 @@ watch(selected, () => {
 const invoices = ref([
   {
     id: '0',
-    invoice: '#123567',
-    total: '$129.00',
+    // invoice: '#123567',
+    // total: '$129.00',
+    name: 'Audit 1',
     status: 'Overdue',
-    customer: 'Dominik Lamakani',
+    customer: 'Parliament',
+    staff:'Tash',
+    priority: 'High',
     issueddate: '22/07/2021',
-    paiddate: '-',
-    type: 'Subscription',
+    duedate: '22/07/2021',
+    type: 'Strategic',
+  },
+  {
+    id: '1',
+    name: 'Audit 1',
+    status: 'In Progress',
+    customer: 'Privacy Commissioner',
+    staff:'MJ',
+    priority: 'Medium',
+    issueddate: '22/07/2021',
+    duedate: '22/07/2021',
+    type: 'Operational',
+  },
+  {
+    id: '2',
+    name: 'Audit 3',
+    status: 'Not yet started',
+    customer: 'Ministry of Education',
+    staff:'Tash',
+    priority: 'Low',
+    issueddate: '22/07/2021',
+    duedate: '22/07/2021',    
+    type: 'Compliance',
   },
   // ... rest of the invoices data ...
 ])
