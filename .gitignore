@@ -6,3 +6,4 @@ dist-ssr
 archive
 .firebase
 .vscode
+*.log
