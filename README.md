@@ -1,5 +1,17 @@
 
-# npm run dev
+
+# Peanut Pixel
+
+
+## Development
+
+### Backend Emulator
+Firebase: 
+```
+    firebase emulators:start
+```
+(see firebase.json for configuration)
+
 
 ## Launch features etc :
 https://drive.google.com/drive/u/0/folders/1WD5llEeEoVhXhwdIBHv2cKYgY9yfQa96
