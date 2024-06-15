@@ -1,5 +1,6 @@
 <template>
   <div class="relative inline-flex">
+  
     <button
       ref="trigger"
       class="btn bg-white dark:bg-slate-800 border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
@@ -7,7 +8,9 @@
       @click.prevent="dropdownOpen = !dropdownOpen"
       :aria-expanded="dropdownOpen"
     >
+  
       <span class="sr-only">Filter</span><wbr />
+      
       <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16">
         <path d="M9 15H7a1 1 0 010-2h2a1 1 0 010 2zM11 11H5a1 1 0 010-2h6a1 1 0 010 2zM13 7H3a1 1 0 010-2h10a1 1 0 010 2zM15 3H1a1 1 0 010-2h14a1 1 0 010 2z" />
       </svg>
@@ -24,7 +27,13 @@
         <div ref="dropdown">
           <div class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase pt-1.5 pb-2 px-3">Filters</div>
           <ul class="mb-4">
-            <li class="py-1 px-3">
+            <li class="py-1 px-3" v-for="filter in filters" :key="filter">
+            <label class="flex items-center">
+              <input type="checkbox" class="form-checkbox" />
+              <span class="text-sm font-medium ml-2">{{ filter }}</span>
+            </label>
+          </li>
+            <!-- <li class="py-1 px-3">
               <label class="flex items-center">
                 <input type="checkbox" class="form-checkbox" />
                 <span class="text-sm font-medium ml-2">Direct VS Indirect</span>
@@ -59,7 +68,7 @@
                 <input type="checkbox" class="form-checkbox" />
                 <span class="text-sm font-medium ml-2">Total Spent</span>
               </label>
-            </li>
+            </li> -->
           </ul>
           <div class="py-2 px-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/20">
             <ul class="flex items-center justify-between">
@@ -82,7 +91,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 export default {
   name: 'DropdownFilter',
-  props: ['align'],
+  props: ['align' , 'filters'],
   setup() {
 
     const dropdownOpen = ref(false)

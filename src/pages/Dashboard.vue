@@ -18,7 +18,7 @@
 
             <!-- Left: Title -->
             <div class="mb-4 sm:mb-0">
-              <h1 class="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold">Audit Insights Hub ✨</h1>
+              <h1 class="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold">Audit Insights Hub</h1>
             </div>
 
             <!-- Right: Actions  -->
@@ -42,13 +42,13 @@
 
             <!-- Left side -->
             <div class="mb-4 sm:mb-0">
-              <ul class="flex flex-wrap -m-1">
+               <ul class="flex flex-wrap -m-1">
                 <li class="m-1">
                   <button
                     class="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-indigo-500 text-white duration-150 ease-in-out">All
                     <span class="ml-1 text-indigo-200">67</span></button>
                 </li>
-                <li class="m-1">
+                <!--<li class="m-1">
                   <button
                     class="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 shadow-sm bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 duration-150 ease-in-out">Type
                     <span class="ml-1 text-slate-400 dark:text-slate-500">14</span></button>
@@ -63,7 +63,18 @@
                     class="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 shadow-sm bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 duration-150 ease-in-out">Status
                     <span class="ml-1 text-slate-400 dark:text-slate-500">19</span></button>
                 </li>
-              </ul>
+              </ul> -->
+              <!-- <div class="flex flex-wrap mx-1"> -->
+              <li class="font-medium text-slate-800 dark:text-slate-100 mx-5">Priority
+              <DropdownFilter :filters="['High', 'Medium', 'Low']"></DropdownFilter>
+              </li>
+            <li class="font-medium text-slate-800 dark:text-slate-100">Status
+              <DropdownFilter :filters="['Overdue', 'In Progress', 'Awaiting Information', 'Not yet started', 'Completed']" ></DropdownFilter>
+            </li>
+            <!-- </div> -->
+
+          </ul> 
+
             </div>
 
             <!-- Right side -->
@@ -73,7 +84,8 @@
               <!-- Dropdown -->
               <DropdownClassicAuditPeriods />
               <!-- Filter button -->
-              <FilterButton align="right" />
+              <!-- <FilterButton align="right" /> -->
+              
             </div>
 
           </div>
@@ -101,7 +113,7 @@ import Header from '../partials/Header.vue'
 import SearchForm from '../components/SearchForm.vue'
 import DeleteButton from '../partials/actions/DeleteButton.vue'
 // import DateSelect from '../components/DateSelect.vue'
-import FilterButton from '../components/DropdownFilter.vue'
+import DropdownFilter from '../components/DropdownFilter.vue'
 import AuditsTable from '../partials/audits/AuditsTable.vue'
 import PaginationClassic from '../components/PaginationClassic.vue'
 import DropdownClassicAuditPeriods from '../components/DropdownClassicAuditPeriods.vue'

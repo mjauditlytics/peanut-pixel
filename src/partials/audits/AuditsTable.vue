@@ -119,6 +119,28 @@ const invoices = ref([
     duedate: '22/07/2021',    
     type: 'Compliance',
   },
+  {
+    id: '3',
+    name: 'Audit 4',
+    status: 'Awaiting Info',
+    customer: 'Ministry of Education',
+    staff:'MJ',
+    priority: 'Low',
+    issueddate: '22/07/2021',
+    duedate: '22/07/2021',    
+    type: 'Compliance',
+  },
+   {
+    id: '4',
+    name: 'Audit 6',
+    status: 'Completed',
+    customer: 'Privacy Commissioner',
+    staff:'MJ',
+    priority: 'Medium',
+    issueddate: '22/07/2021',
+    duedate: '22/07/2021',
+    type: 'Operational',
+  },
   // ... rest of the invoices data ...
 ])
 

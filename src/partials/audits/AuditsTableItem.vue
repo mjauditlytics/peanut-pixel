@@ -38,7 +38,16 @@
       <div class="inline-flex font-medium rounded-full text-center px-2.5 py-0.5" :class="statusColor(invoice.status)">{{invoice.status}}</div>
     </td>    
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
+
       <div class="space-x-1">
+        <button class="text-slate-400 hover:text-slate-500 dark:text-slate-500 dark:hover:text-slate-400 rounded-full">
+        <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
+          <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z">
+
+        </path></svg>
+        <div class="py-1"></div>
+      </button>
+
         <button class="text-slate-400 hover:text-slate-500 dark:text-slate-500 dark:hover:text-slate-400 rounded-full">
           <span class="sr-only">Edit</span>
           <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
@@ -51,6 +60,12 @@
               <path d="M16 20c.3 0 .5-.1.7-.3l5.7-5.7-1.4-1.4-4 4V8h-2v8.6l-4-4L9.6 14l5.7 5.7c.2.2.4.3.7.3zM9 22h14v2H9z" />
           </svg>
         </button>
+        <button class="text-slate-400 hover:text-slate-500 dark:text-slate-500 dark:hover:text-slate-400 rounded-full">
+          <span class="sr-only">Download</span>
+          <img src="../../images/mail-send-symbolic-svgrepo-com.svg" alt="mail" class="w-6 h-6 fill-current">
+        </button>        
+        
+
         <button class="text-rose-500 hover:text-rose-600 rounded-full">
           <span class="sr-only">Delete</span>
           <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
@@ -86,7 +101,7 @@ const priorityColor = (status) => {
     case 'Low':
       return 'text-emerald-500'
     case 'Medium':
-      return 'text-amber-500'
+      return 'text-yellow-400'
     case 'High':
       return 'text-rose-500'          
     default:
@@ -96,12 +111,15 @@ const priorityColor = (status) => {
 
 const statusColor = (status) => {
   switch (status) {
-    case 'Yet to start':
+ 
+    case 'Completed':
       return 'bg-emerald-100 dark:bg-emerald-400/30 text-emerald-600 dark:text-emerald-400'
     case 'In Progress':
       return 'bg-amber-100 dark:bg-amber-400/30 text-amber-600 dark:text-amber-400'
     case 'Overdue':
-      return 'bg-rose-100 dark:bg-rose-500/30 text-rose-500 dark:text-rose-400'          
+      return 'bg-rose-100 dark:bg-rose-500/30 text-rose-500 dark:text-rose-400'      
+    case 'Awaiting Information':
+      return 'bg-purple-100 dark:bg-purple-500/30 text-purple-500 dark:text-purple-400'            
     default:
       return 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
   }
