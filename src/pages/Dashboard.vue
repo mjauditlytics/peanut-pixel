@@ -122,11 +122,21 @@
                 </li>
               </ul> -->
               <!-- <div class="flex flex-wrap mx-1"> -->
-              <li class="font-medium text-slate-800 dark:text-slate-100 mx-5">Priority
-              <DropdownFilter :filters="['High', 'Medium', 'Low']"></DropdownFilter>
+              <li class="font-medium text-slate-800 dark:text-slate-100 mx-2">
+                <!-- Priority -->
+                <div class="text-sm inline-flex font-semibold  bg-white dark:bg-slate-800 border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 text-slate-500 hover:text-slate-600 dark:text-slate-100 dark:hover:text-slate-300 rounded-full text-center items-center px-2 py-1">
+                 
+                  <span class="ml-2">  Priority</span>
+                  <DropdownFilter :filters="['High', 'Medium', 'Low']"></DropdownFilter>
+                </div>
+              
               </li>
-            <li class="font-medium text-slate-800 dark:text-slate-100">Status
-              <DropdownFilter :filters="['Overdue', 'In Progress', 'Awaiting Information', 'Not yet started', 'Completed']" ></DropdownFilter>
+                <li class="font-medium text-slate-800 dark:text-slate-100 ">
+                  <div class="text-sm inline-flex font-semibold  bg-white dark:bg-slate-800 border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 text-slate-500 hover:text-slate-600 dark:text-slate-100 dark:hover:text-slate-300 rounded-full text-center items-center px-2 py-1">
+                    <span class="ml-2"> Status</span>
+                  
+                 <DropdownFilter :filters="['Overdue', 'In Progress', 'Awaiting Information', 'Not yet started', 'Completed']" ></DropdownFilter>
+                 </div>
             </li>
             <!-- </div> -->
 

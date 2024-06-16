@@ -72,23 +72,10 @@ const debouncedEmit = _.debounce(() => {
   emit('update-data-form', form.value);
 }, 500);
 
-// watchEffect( debouncedEmit );
+
 watch(form, (newVal, oldVal) => {
   debouncedEmit();
 }, { deep: true });
-
-// watch(staffName, _.debounce(() => {
-//   const key = 'staffName'; // key to update
-//   const newValue = staffName.value; // new value
-//   emit('update-data', { key, newValue });
-// }, 500)); // delay in milliseconds, adjust to your needs
-
-
-// watch(teamName, _.debounce(() => {
-//   const key = 'teamName'; // key to update
-//   const newValue = teamName.value; // new value
-//   emit('update-data', { key, newValue });
-// }, 500)); // delay in milliseconds, adjust to your needs
 
 
 
