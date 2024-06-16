@@ -33,22 +33,31 @@
       <div class="p-2 text-3xl text-center">
         <br>
       </div>
+      <div v-if="projectSettings.staffName" class="p-4 text-sm ">
+        <span class="font-bold text-center justify-center">Staff
+          Name:&nbsp;</span>{{ projectSettings.staffName }}
+      </div>
+     
 
-      <div class="p-2 text-3xl text-center">
-        <br>
-      </div>
 
-
-      <div class="p-2 text-3xl"> <br></div>
-      <div class="p-2 text-3xl text-center">
-        <br>
+      <div v-if="projectSettings.execSummary" class="p-2 text-1xl text-center">
+        ExecSummary: {{projectSettings.execSummary}}
+        Background: {{projectSettings.background}}
+        Objective: {{projectSettings.objective}}
+        Scope : {{projectSettings.scope}}
+        Strengths: {{projectSettings.strengths}}
+        Weaknesses: {{projectSettings.weaknesses}}
+        Recommendations: {{projectSettings.recommendations}}
       </div>
-      <div class="p-2 text-3xl text-center">
-        <br>
+      <div v-else>
+        <div class="p-2 text-3xl text-center">
+          <br>
+        </div>
+      
+       
       </div>
-      <div class="p-2 text-3xl text-center">
-        <br>
-      </div>
+      
+ 
       <div class="p-2 text-base"></div>
 
       <div v-if="projectSettings.reviewStartDate" class="p-4 text-sm ">

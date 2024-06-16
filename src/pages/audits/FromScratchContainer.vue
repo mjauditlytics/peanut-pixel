@@ -80,6 +80,16 @@
             <ProjectSetup4 :projectSettings="projectSettings" @update-data="updateData" />
           </div>
 
+          <!-- Form 5: Auditor Name/ Team/Didivion -->
+          <div v-if="currentStep === 5">
+            <ProjectSetup5 :projectSettings="projectSettings" @update-data="updateData" />
+          </div>        
+
+          <!-- Form 5: Auditor Name/ Team/Didivion -->
+          <div v-if="currentStep === 6">
+            <ProjectSetup6 :projectSettings="projectSettings" @update-data-form="updateDataForm" />
+          </div>          
+
 
           <div class="px-4 py-8">
             <div class="max-w-md mx-auto">
@@ -114,29 +124,49 @@
 
 <script setup>
 import { ref } from 'vue'
+import _ from 'lodash'
 import ProjectSetup1 from './ProjectSetup1.vue'
 import ProjectSetup2 from './ProjectSetup2.vue'
 import ProjectSetup3 from './ProjectSetup3.vue'
 import ProjectSetup4 from './ProjectSetup4.vue'
+import ProjectSetup5 from './ProjectSetup5.vue'
+import ProjectSetup6 from './ProjectSetup6.vue'
 import TemplateBasic from '../../partials/audits/TemplateBasic.vue'
 
 // const sidebarOpen = ref(false)
 const currentStep = ref(1)
 const minStep = 1
-const maxSteps = 4
-const projectSetupSteps = [1, 2, 3, 4]
+const maxSteps = 6
+const projectSetupSteps =  _.range(minStep, maxSteps + 1)
 const projectSettings = ref({
   projectName: '',
   orgName: '',
   sectorName: '',
+  staffName:'',
+  teamName:'',
   reviewStartDate: null,
   reviewEndDate: null,
-  issueDate: null
+  issueDate: null,
+
+  execSummary: '',
+  background: '',
+  objective: '',
+  scope: '',
+  strengths: '',
+  weaknesses: '',
+  recommendations: ''
 })
 
 const updateData = ({ key, newValue }) => {
   console.log(`update date ${key} , ${newValue}`)
   projectSettings.value[key] = newValue;
+};
+
+const updateDataForm = (formElements) => {
+  for (const [key, value] of Object.entries(formElements)) {
+      console.log(`Key: ${key}, Value: ${value}`);
+      projectSettings.value[key] = value;
+  }
 };
 
 const nextForm = () => {

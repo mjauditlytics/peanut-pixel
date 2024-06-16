@@ -10,11 +10,11 @@
       <div class="m-1.5">
                     <!-- Start -->
                     <!-- <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white" aria-controls="news-modal" @click.stop="newsModalOpen = true">What's New</button> -->
-                    
+                    <!--
                     <ModalBlank id="news-modal" :modalOpen="newsModalOpen" @close-modal="newsModalOpen = false">
                       <div class="relative">
                         <img class="w-full" src="../../images/modal-image.jpg" width="460" height="200" alt="New on Mosaic" />
-                        <!-- Close button -->
+                        <!-- Close button -- >
                         <button class="absolute top-0 right-0 mt-5 mr-5 text-slate-50 hover:text-white" @click.stop="newsModalOpen = false">
                           <div class="sr-only">Close</div>
                           <iframe 
@@ -25,33 +25,33 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen>
                           </iframe>
-                          <!-- <svg class="w-4 h-4 fill-current">
+                          <!- - <svg class="w-4 h-4 fill-current">
                             <path d="M7.95 6.536l4.242-4.243a1 1 0 111.415 1.414L9.364 7.95l4.243 4.242a1 1 0 11-1.415 1.415L7.95 9.364l-4.243 4.243a1 1 0 01-1.414-1.415L6.536 7.95 2.293 3.707a1 1 0 011.414-1.414L7.95 6.536z" />
-                          </svg> -->
+                          </svg> - ->
                         </button>
-                      </div>
+                      </div> 
                       <div class="p-5">
-                        <!-- Modal header -->
+                        <!--  Modal header - ->
                         <div class="mb-2">
-                          <!-- <div class="mb-3">
+                          <!- - <div class="mb-3">
                             <div class="text-xs inline-flex font-medium bg-indigo-100 dark:bg-indigo-500/30 text-indigo-600 dark:text-indigo-400 rounded-full text-center px-2.5 py-1">New on Mosaic</div>
-                          </div> -->
+                          </div> -- >
                           <div class="text-lg font-semibold text-slate-800 dark:text-slate-100">Help your team work faster with X 🏃‍♂️</div>
                         </div>
-                        <!-- Modal content -->
+                        <!- - Modal content - ->
                         <div class="text-sm mb-5">
                           <div class="space-y-2">
                             <p>You might not be aware of this fact, but every frame, digital video, canvas, responsive design, and image often has a rectangular shape that is exceptionally precise in proportion (or ratio).</p>
                             <p>The ratio has to be well-defined to make shapes fit into different and distinct mediums, such as computer, movies, television and camera screens.</p>
                           </div>
                         </div>
-                        <!-- Modal footer -->
+                        <!- - Modal footer - ->
                         <div class="flex flex-wrap justify-end space-x-2">
                           <button class="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white" @click.stop="newsModalOpen = false">Cool, I Got it</button>
                         </div>
                       </div>                      
                     </ModalBlank>
-                    <!-- End -->
+                    <!- - End -->
                   </div>
 
 
@@ -178,7 +178,7 @@ const sidebarOpen = ref(false);
 const selectedItems = ref([]);
 const newsModalOpen = ref(true);
 const youtubeEmbedUrl = ref("https://www.youtube.com/embed/wBp6B5rmOKU");
-// const isFirstLoad = ref(true);
+//const isFirstLoad = ref(true);
 
 
 const updateSelectedItems = (selected) => {

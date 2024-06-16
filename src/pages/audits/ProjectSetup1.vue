@@ -2,10 +2,10 @@
   <div class="px-4 py-8">
     <div class="max-w-md mx-auto">
 
-      <h1 class="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-6">Tell us what’s your situation ✨</h1>
+      <h1 class="text-3xl text-slate-800 dark:text-slate-100 font-bold mb-12">Describe your Project</h1>
       <!-- Form -->
       <form>
-        <div class="space-y-3 mb-8">
+        <div class="space-y-3 m-8">
           <div class="flex items-center justify-between">
             <label class="text-1xl text-slate-800 dark:text-slate-100 font-bold mb-6" for="orgName">
               Enter the name of the organisation (client)
@@ -28,7 +28,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import _ from 'lodash'; // make sure to install lodash
+import _ from 'lodash';
 const emit = defineEmits(["update-data"]);
 // import { useRouter } from 'vue-router'
 import Tooltip from '../../components/Tooltip.vue'
